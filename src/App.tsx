@@ -9,7 +9,6 @@ function App() {
     <>
       <Navbar />
       <Courses />
-      <AddCourse />
       <SignUp />
     </>
   );
