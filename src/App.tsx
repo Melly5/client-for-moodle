@@ -8,8 +8,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <Courses />
-      <SignUp />
+      <div className="flex place-content-center ">
+        <Courses />
+      </div>
     </>
   );
 }
