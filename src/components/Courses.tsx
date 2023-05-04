@@ -85,7 +85,6 @@ export const Courses = () => {
       setCourses(allCourses);
       console.log(resp.data);
     });
-
     const apiUrl1 = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=${token}&wsfunction=${func1}&moodlewsrestformat=json&courseid=1`;
     axios.get(apiUrl1).then((resp) => {
       const allUsers = resp.data;
@@ -101,24 +100,24 @@ export const Courses = () => {
         role="list"
         className="relative divide-y divide-gray-100 rounded-lg bg-gray-100 p-10 m-10"
       >
-        {courses.map((person) => (
+        {courses.map((course) => (
           <li
-            key={person.fullname}
+            key={course.fullname}
             className="flex justify-between gap-x-6 py-5 w-150px"
           >
             <div className="flex gap-x-4">
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-900">
-                  shortname: {person.shortname}
+                  shortname: {course.shortname}
                 </p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                  fullname: {person.fullname}
+                  fullname: {course.fullname}
                 </p>
               </div>
             </div>
             <div className="hidden sm:flex sm:flex-col sm:items-end">
               <p className="text-sm leading-6 text-gray-900">
-                displayname: {person.displayname}
+                displayname: {course.displayname}
               </p>
             </div>
           </li>
@@ -129,21 +128,21 @@ export const Courses = () => {
         role="list"
         className="relative divide-y divide-gray-100  rounded-lg bg-gray-100 p-10 m-10"
       >
-        {users.map((person) => (
+        {users.map((course_user) => (
           <li
-            key={person.fullname}
+            key={course_user.fullname}
             className="flex justify-between gap-x-6 py-5 w-150px"
           >
             <div className="flex gap-x-4">
               <div className="min-w-0 flex-auto">
                 <p className="text-sm font-semibold leading-6 text-gray-900">
-                  firstname: {person.firstname}
+                  firstname: {course_user.firstname}
                 </p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                  lastname: {person.lastname}
+                  lastname: {course_user.lastname}
                 </p>
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                  email: {person.email}
+                  email: {course_user.email}
                 </p>
               </div>
             </div>
