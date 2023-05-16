@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon, } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { navigationIcons, icons } from "./consts";
-
 
 export const NavBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,24 +32,22 @@ export const NavBar = () => {
             >
               <span className="sr-only">{icons[0].name}</span>
               <React.Fragment key={icons[0].name}>
-                  {icons[0].icon}
-                </React.Fragment>
+                {icons[0].icon}
+              </React.Fragment>
             </button>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <div className="hidden lg:flex lg:gap-x-4 mr-50px">
-            {navigationIcons.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                <React.Fragment key={item.name}>
-                  {item.icon}
-                </React.Fragment>
-              </a>
-            ))}
-          </div>
+            <div className="hidden lg:flex lg:gap-x-4 mr-50px">
+              {navigationIcons.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  <React.Fragment key={item.name}>{item.icon}</React.Fragment>
+                </a>
+              ))}
+            </div>
             <a
               href="/login"
               className="text-sm font-semibold leading-6 text-gray-900 ml-7"
@@ -81,7 +78,7 @@ export const NavBar = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">{icons[1].name}</span>
-              <React.Fragment key={icons[0].name}>
+                <React.Fragment key={icons[0].name}>
                   {icons[1].icon}
                 </React.Fragment>
               </button>
@@ -96,12 +93,11 @@ export const NavBar = () => {
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <div className="flex justify-start">  
+                      <div className="flex justify-start">
                         <React.Fragment key={item.name}>
                           {item.icon}
-                        </React.Fragment> 
+                        </React.Fragment>
                         <div className="ml-5">{item.name} </div>
-                        
                       </div>
                     </a>
                   ))}
