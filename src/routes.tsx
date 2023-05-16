@@ -1,5 +1,5 @@
-import { Courses } from "./components/Courses";
-import { Auth } from "./pages/Auth";
+import { Courses } from "./pages/CoursesList/Courses";
+import { Login } from "./pages/Login";
 import { MAIN_ROUTE, LOGIN_ROUTE } from "./utils/consts";
 
 export const authRoutes = [
@@ -12,6 +12,6 @@ export const authRoutes = [
 export const publicRoutes = [
     {
       path: LOGIN_ROUTE,
-      Component: Auth  
+      Component: Login  
     },
 ]
