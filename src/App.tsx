@@ -1,17 +1,15 @@
-import "./App.css";
-import { AddCourse } from "./components/AddCourse";
-import { Courses } from "./components/Courses";
-import { Navbar } from "./components/Navbar";
-import { SignUp } from "./components/SignUp";
+import { BrowserRouter } from "react-router-dom";
+import { NavBar } from "./components/Navbar";
+import { AppRouter } from "./components/AppRouter";
 
 function App() {
   return (
-    <>
-      <Navbar />
+    <BrowserRouter>
+      <NavBar />
       <div className="flex place-content-center ">
-        <Courses />
+        <AppRouter />
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 
