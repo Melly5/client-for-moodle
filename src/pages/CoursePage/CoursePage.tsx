@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Folder } from "../../components/Folder/Folder";
+import { Forum } from "../../components/Forum/Forum";
 
 export interface info {
   id: number;
@@ -11,6 +12,7 @@ export interface info {
 
 export const CoursePage = () => {
   const [courseInfo, setCourseInfo] = useState<info[]>([]);
+
   const token = "2b8e54a638f0422b6859f223fa0a086e";
   const func = "core_course_get_contents";
   const params = useParams();
@@ -34,6 +36,7 @@ export const CoursePage = () => {
             {info.modules.map((module: any) => (
               <>
                 {module.modname === "folder" && <Folder {...module} />}
+                {module.modname === "forum" && <Forum {...module} />}
                 <div>{module.name}</div>
               </>
             ))}
