@@ -4,8 +4,6 @@ export const FolderPage = () => {
   const { state } = useLocation();
   const { name, content } = state;
 
-  console.log(state);
-
   return (
     <div>
       {name}
