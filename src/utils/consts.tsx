@@ -3,3 +3,4 @@ export const MAIN_ROUTE = "/";
 export const COURSE_ROUTE = "/course/:id";
 export const FOLDER_ROUTE = "/folder/:id";
 export const FORUM_ROUTE = "/forum/:id";
+export const ASSIGN_ROUTE = "/assign/:id";
