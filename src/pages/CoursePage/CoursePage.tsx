@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Folder } from "../../components/Folder/Folder";
 
 export interface info {
   id: number;
@@ -31,7 +32,10 @@ export const CoursePage = () => {
           <div>{info.name}</div>
           <div className="flex flex-col m-5">
             {info.modules.map((module: any) => (
-              <div>{module.name}</div>
+              <>
+                {module.modname === "folder" && <Folder {...module} />}
+                <div>{module.name}</div>
+              </>
             ))}
           </div>
         </>

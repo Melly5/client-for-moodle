@@ -1,7 +1,13 @@
+import { FolderPage } from "./components/Folder/FolderPage";
 import { CoursePage } from "./pages/CoursePage/CoursePage";
 import { Courses } from "./pages/CoursesList/Courses";
 import { Login } from "./pages/Login";
-import { MAIN_ROUTE, LOGIN_ROUTE, COURSE_ROUTE } from "./utils/consts";
+import {
+  MAIN_ROUTE,
+  LOGIN_ROUTE,
+  COURSE_ROUTE,
+  FOLDER_ROUTE,
+} from "./utils/consts";
 
 export const authRoutes = [
   {
@@ -11,6 +17,10 @@ export const authRoutes = [
   {
     path: COURSE_ROUTE,
     Component: CoursePage,
+  },
+  {
+    path: FOLDER_ROUTE,
+    Component: FolderPage,
   },
 ];
 
