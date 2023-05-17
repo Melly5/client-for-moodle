@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const FolderPage = () => {
   const { state } = useLocation();
@@ -8,8 +8,8 @@ export const FolderPage = () => {
     <div>
       {name}
       <div>
-        {content.map((content: any) => (
-          <>
+        {content.map((content: any, id: number) => (
+          <div key={id}>
             <a
               href={`${content.fileurl}&token=2b8e54a638f0422b6859f223fa0a086e`}
               download
@@ -17,7 +17,7 @@ export const FolderPage = () => {
             >
               {content.filename}
             </a>
-          </>
+          </div>
         ))}
       </div>
     </div>

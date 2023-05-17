@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Folder } from "../../components/Folder/Folder";
 import { Forum } from "../../components/Forum/Forum";
+import { Assign } from "../../components/Assign/Assign";
 
 export interface info {
   id: number;
@@ -30,19 +31,20 @@ export const CoursePage = () => {
 
   return (
     <div className="flex flex-col content-center">
-      {courseInfo.map((info) => (
-        <>
+      {courseInfo.map((info, id) => (
+        <div key={id}>
           <div>{info.name}</div>
           <div className="flex flex-col m-5">
-            {info.modules.map((module: any) => (
-              <>
+            {info.modules.map((module: any, id: number) => (
+              <div key={id} className="flex content-center my-3">
                 {module.modname === "folder" && <Folder {...module} />}
                 {module.modname === "forum" && <Forum {...module} />}
+                {module.modname === "assign" && <Assign {...module} />}
                 <div>{module.name}</div>
-              </>
+              </div>
             ))}
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

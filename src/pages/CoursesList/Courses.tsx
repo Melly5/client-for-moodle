@@ -25,8 +25,8 @@ export const Courses = () => {
         role="list"
         className="flex flex-wrap justify-between  relative divide-y p-10 "
       >
-        {courses.map((course) => (
-          <CourseItem {...course} />
+        {courses.map((course, id) => (
+          <CourseItem key={id} {...course} />
         ))}
       </div>
     </div>
