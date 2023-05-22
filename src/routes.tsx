@@ -21,10 +21,6 @@ import {
 
 export const authRoutes = [
   {
-    path: MAIN_ROUTE,
-    Component: Courses,
-  },
-  {
     path: COURSE_ROUTE,
     Component: CoursePage,
   },
