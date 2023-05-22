@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const FolderPage = () => {
   const { state } = useLocation();
   const { name, content } = state;
-
+  let navigate = useNavigate();
   return (
-    <div>
+    <div className="w-5/6">
       {name}
       <div>
         {content.map((content: any, id: number) => (
@@ -20,6 +20,9 @@ export const FolderPage = () => {
           </div>
         ))}
       </div>
+      <button className="btn" onClick={() => navigate(-1)}>
+        Go Back
+      </button>
     </div>
   );
 };
