@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Course } from "./consts";
-import { CourseItem } from "./components/CourseItem";
+import { CourseItem } from "../../components/Course/CourseItem";
 
 export const Courses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
