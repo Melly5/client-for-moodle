@@ -5,6 +5,9 @@ import { Folder } from "../../components/Folder/Folder";
 import { Forum } from "../../components/Forum/Forum";
 import { Assign } from "../../components/Assign/Assign";
 import { Quiz } from "../../components/Quiz/Quiz";
+import { Lesson } from "../../components/Lesson/Lesson";
+import { Resource } from "../../components/Resource/Resource";
+import { Label } from "../../components/Label/Label";
 
 export interface info {
   id: number;
@@ -33,28 +36,23 @@ export const CoursePage = () => {
   return (
     <div className="flex flex-col content-center">
       {courseInfo.map((info, id) => (
-        <div key={id}>
+        <div key={id} className="bg-gray-100 m-5 py-5 px-20 rounded-3xl">
           <div>{info.name}</div>
           <div className="flex flex-col m-5">
             {info.modules.map((module: any, id: number) => (
-              <div key={id} className="flex content-center my-3">
+              <div key={id} className="flex content-center my-3 cursor-pointer">
                 {module.modname === "folder" && <Folder {...module} />}
                 {module.modname === "forum" && <Forum {...module} />}
                 {module.modname === "assign" && <Assign {...module} />}
                 {module.modname === "quiz" && <Quiz {...module} />}
-                <div>{module.name}</div>
+                {module.modname === "lesson" && <Lesson {...module} />}
+                {module.modname === "resource" && <Resource {...module} />}
+                {module.modname === "label" && <Label {...module} />}
               </div>
             ))}
           </div>
         </div>
       ))}
-      <iframe
-        id="inlineFrameExample"
-        title="Inline Frame Example"
-        width="300"
-        height="200"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"
-      ></iframe>
     </div>
   );
 };
