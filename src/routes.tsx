@@ -1,7 +1,9 @@
 import { AssignPage } from "./components/Assign/AssignPage";
 import { FolderPage } from "./components/Folder/FolderPage";
 import { ForumPage } from "./components/Forum/ForumPage";
+import { LessonPage } from "./components/Lesson/LessonPage";
 import { QuizPage } from "./components/Quiz/QuizPage";
+import { ResourcePage } from "./components/Resource/ResourcePage";
 import { CoursePage } from "./pages/CoursePage/CoursePage";
 import { Courses } from "./pages/CoursesList/Courses";
 import { Login } from "./pages/Login";
@@ -13,6 +15,8 @@ import {
   FORUM_ROUTE,
   ASSIGN_ROUTE,
   QUIZ_ROUTE,
+  LESSON_ROUTE,
+  RESOURCE_ROUTE,
 } from "./utils/consts";
 
 export const authRoutes = [
@@ -39,6 +43,14 @@ export const authRoutes = [
   {
     path: QUIZ_ROUTE,
     Component: QuizPage,
+  },
+  {
+    path: LESSON_ROUTE,
+    Component: LessonPage,
+  },
+  {
+    path: RESOURCE_ROUTE,
+    Component: ResourcePage,
   },
 ];
 

@@ -5,3 +5,5 @@ export const FOLDER_ROUTE = "/folder/:id";
 export const FORUM_ROUTE = "/forum/:id";
 export const ASSIGN_ROUTE = "/assign/:id";
 export const QUIZ_ROUTE = "/quiz/:id";
+export const LESSON_ROUTE = "/lesson/:id";
+export const RESOURCE_ROUTE = "/resource/:id";
