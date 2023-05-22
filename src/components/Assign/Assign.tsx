@@ -11,7 +11,6 @@ export interface AssignComponentI {
 
 export const Assign = (assign: AssignComponentI) => {
   let navigate = useNavigate();
-  console.log(assign);
 
   return (
     <div

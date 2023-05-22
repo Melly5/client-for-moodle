@@ -23,8 +23,8 @@ export const ForumPage = () => {
     <div>
       <div>{name}</div>
       <div>
-        {discussions.map((discussion: any) => (
-          <div>
+        {discussions.map((discussion: any, id: number) => (
+          <div key={id}>
             <div>{discussion.name}</div>
             <div>{parse(discussion.message)}</div>
           </div>
