@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { authRoutes, publicRoutes } from "../routes";
+import { Courses } from "../pages/CoursesList/Courses";
 
 export const AppRouter = () => {
   const authRouteComponents = authRoutes.map(({ path, Component }) => (
@@ -13,6 +14,7 @@ export const AppRouter = () => {
     <Routes>
       {authRouteComponents}
       {publicRouteComponents}
+      <Route path="*" element={<Courses />} />
     </Routes>
   );
 };
