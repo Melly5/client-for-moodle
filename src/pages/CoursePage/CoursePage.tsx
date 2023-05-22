@@ -42,7 +42,7 @@ export const CoursePage = () => {
         <label className="text-2xl font-semibold my-5">{course.fullname}</label>
         <div className="my-5">{parse(course.summary)}</div>
       </div>
-      <div className="w-2/5">
+      <div className="w-3/5">
         {courseInfo.map((info, id) => (
           <div key={id} className="bg-gray-100 m-5 py-5 px-20 rounded-3xl">
             <div>{info.name}</div>
