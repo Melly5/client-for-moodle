@@ -6,18 +6,18 @@ export const Assign = (assign: any) => {
   let navigate = useNavigate();
 
   return (
-    <div className=" bg-gray-100 p-4">
+    <div
+      className="p-4 text-white bg-blue-500 rounded-xl cursor-pointer"
+      onClick={() =>
+        navigate(`/assign/${assign.id}`, {
+          state: { id: assign.contextid },
+        })
+      }
+    >
       <div className=" flex">
         <ArrowUpOnSquareIcon className="h-6 w-6 mr-3" aria-hidden="true" />
-        <div
-          onClick={() =>
-            navigate(`/assign/${assign.id}`, {
-              state: { id: assign.contextid },
-            })
-          }
-        >
-          {assign.name}
-        </div>
+
+        {assign.name}
       </div>
       <div className="flex flex-col">
         {assign.dates.map((date: any, id: number) => (
