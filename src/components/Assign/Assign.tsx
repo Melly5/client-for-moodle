@@ -2,15 +2,23 @@ import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import SimpleDateTime from "react-simple-timestamp-to-date";
 
-export const Assign = (assign: any) => {
+export interface AssignComponentI {
+  id: number;
+  name: string;
+  dates: [];
+  contextid: number;
+}
+
+export const Assign = (assign: AssignComponentI) => {
   let navigate = useNavigate();
+  console.log(assign);
 
   return (
     <div
       className="p-4 text-white bg-blue-500 rounded-xl cursor-pointer"
       onClick={() =>
         navigate(`/assign/${assign.id}`, {
-          state: { id: assign.contextid },
+          state: { id: assign.id },
         })
       }
     >
