@@ -27,39 +27,36 @@ export interface File {
 }
 
 const InitialState: Assignment = {
-  cmid: 2,
-  name: "assign",
+  cmid: 0,
+  name: "",
   configs: [],
   introattachments: [],
-  activity: "activity",
-  intro: "intro",
-  duedate: 3255,
-  allowsubmissionsfromdate: 1683910800,
+  activity: "",
+  intro: "",
+  duedate: 0,
+  allowsubmissionsfromdate: 0,
 };
 
 export const AssignPage = () => {
   const [assigment, setAssigment] = useState<Assignment>(InitialState);
   const [submission, setSubmission] = useState<any>();
+  const [submissionStatus, setSubmissionStatus] = useState<any>();
   const { state } = useLocation();
   const { id } = state;
   let token = "2b8e54a638f0422b6859f223fa0a086e";
 
   useEffect(() => {
-    const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_assignments&moodlewsrestformat=json&courseids[0]=3`;
-    setTimeout(() => {
-      axios.get(apiUrl).then((resp) => {
-        const data = resp.data;
-        getAssign(data.courses[0].assignments);
-      });
-    });
-    const apiUrl1 = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_submissions&moodlewsrestformat=json&assignmentids[0]=${assigment.id}`;
-    setTimeout(() => {
-      axios.get(apiUrl1).then((resp) => {
-        const data = resp.data;
+    let apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_assignments&moodlewsrestformat=json&courseids[0]=3`;
+    let apiUrl1 = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_submissions&moodlewsrestformat=json&assignmentids[0]=${assigment.id}`;
+    let apiUrl2 = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_submission_status&moodlewsrestformat=json&assignid=1`;
 
-        setSubmission(data?.assignments[0].submissions[0]);
-      });
-    });
+    axios.all([axios.get(apiUrl), axios.get(apiUrl1), axios.get(apiUrl2)]).then(
+      axios.spread((Assign, Submission, SubmissionStatus) => {
+        getAssign(Assign.data.courses[0].assignments);
+        setSubmission(Submission.data.assignments[0].submissions[0]);
+        setSubmissionStatus(SubmissionStatus.data.feedback);
+      })
+    );
   }, []);
 
   const getAssign = (data: Assignment[]) => {
@@ -67,8 +64,9 @@ export const AssignPage = () => {
       item.cmid === id && setAssigment(item);
     });
   };
-  //console.log(submission);
   console.log(assigment);
+  console.log(submission);
+  console.log(submissionStatus);
 
   return (
     <div>
@@ -118,6 +116,24 @@ export const AssignPage = () => {
                   {item.type === "comments" && <div>комменатрии</div>}
                 </div>
               ))}
+          </div>
+        </>
+      )}
+      {submissionStatus && (
+        <>
+          Отзыв:
+          <div>Оценка: {parse(submissionStatus.gradefordisplay)}</div>
+          <div>
+            Оценено в:{" "}
+            <SimpleDateTime>{submissionStatus.gradeddate}</SimpleDateTime>
+          </div>
+          <div>
+            {submissionStatus.plugins[0] && (
+              <div>
+                {submissionStatus.plugins[0].editorfields[0].description} :
+                {parse(submissionStatus.plugins[0].editorfields[0].text)}
+              </div>
+            )}
           </div>
         </>
       )}
