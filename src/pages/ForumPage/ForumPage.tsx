@@ -10,11 +10,10 @@ export const ForumPage = () => {
 
   useEffect(() => {
     const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_forum_get_forum_discussions&moodlewsrestformat=json&forumid=${id}`;
-    setTimeout(() => {
-      axios.get(apiUrl).then((resp) => {
-        const data = resp.data;
-        setDiscussions(data.discussions);
-      });
+
+    axios.get(apiUrl).then((resp) => {
+      const data = resp.data;
+      setDiscussions(data.discussions);
     });
   }, []);
 

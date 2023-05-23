@@ -20,7 +20,10 @@ export const Lesson = (lesson: LessonI) => {
       <div
         onClick={() =>
           navigate(`/lesson/${lesson.id}`, {
-            state: { name: lesson.name, instance: lesson.instance },
+            state: {
+              name: lesson.name,
+              instance: lesson.instance,
+            },
           })
         }
       >
