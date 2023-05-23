@@ -1,7 +1,17 @@
 import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-export const Lesson = (folder: any) => {
+export interface LessonI {
+  id: number;
+  instance: number;
+  name: string;
+  completion: number;
+  completiondata: {};
+  dates: [];
+  url: string;
+}
+
+export const Lesson = (lesson: LessonI) => {
   let navigate = useNavigate();
 
   return (
@@ -9,12 +19,12 @@ export const Lesson = (folder: any) => {
       <ClipboardDocumentIcon className="h-6 w-6 mr-3" aria-hidden="true" />
       <div
         onClick={() =>
-          navigate(`/lesson/${folder.id}`, {
-            state: { name: folder.name, content: folder.contents },
+          navigate(`/lesson/${lesson.id}`, {
+            state: { name: lesson.name, instance: lesson.instance },
           })
         }
       >
-        {folder.name}
+        {lesson.name}
       </div>
     </div>
   );

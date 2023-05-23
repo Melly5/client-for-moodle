@@ -1,7 +1,13 @@
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-export const Forum = (forum: any) => {
+export interface ForumI {
+  id: number;
+  instance: number;
+  name: string;
+}
+
+export const Forum = (forum: ForumI) => {
   let navigate = useNavigate();
 
   return (

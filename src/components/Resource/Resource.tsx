@@ -1,19 +1,34 @@
 import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
 
-export const Resource = (folder: any) => {
-  let navigate = useNavigate();
+export interface ResourceI {
+  name: string;
+  contents: FileContents[];
+}
 
+export interface FileContents {
+  author: string;
+  filename: string;
+  filepath: string;
+  filesize: number;
+  fileurl: string;
+  isexternalfile: boolean;
+  timecreated: number;
+  timemodified: number;
+  type: string;
+  userid: number;
+}
+
+export const Resource = (resource: any) => {
   return (
     <div className=" flex">
       <ClipboardDocumentIcon className="h-6 w-6 mr-3" aria-hidden="true" />
 
       <a
-        href={`${folder.contents[0].fileurl}&token=2b8e54a638f0422b6859f223fa0a086e`}
+        href={`${resource.contents[0].fileurl}&token=2b8e54a638f0422b6859f223fa0a086e`}
         download
         className="mx-3"
       >
-        {folder.name}
+        {resource.name}
       </a>
     </div>
   );

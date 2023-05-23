@@ -1,7 +1,13 @@
 import { FolderOpenIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-export const Folder = (folder: any) => {
+export interface FolderI {
+  id: number;
+  name: string;
+  contents: string;
+}
+
+export const Folder = (folder: FolderI) => {
   let navigate = useNavigate();
 
   return (
