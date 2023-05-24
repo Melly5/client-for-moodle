@@ -45,7 +45,7 @@ export const CoursePage = () => {
       <div className="w-3/5">
         {courseInfo.map((info, id) => (
           <div key={id} className="bg-gray-100 m-5 py-5 px-20 rounded-3xl">
-            <div>{info.name}</div>
+            <div className="my-5 text-xl font-bold">{info.name}</div>
             <div className="flex flex-col m-5">
               {info.modules.map((module: any, id: number) => (
                 <div

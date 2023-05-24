@@ -7,3 +7,4 @@ export const ASSIGN_ROUTE = "/assign/:id";
 export const QUIZ_ROUTE = "/quiz/:id";
 export const LESSON_ROUTE = "/lesson/:id";
 export const RESOURCE_ROUTE = "/resource/:id";
+export const DISCUSSION_ROUTE = "/discussion/:id";

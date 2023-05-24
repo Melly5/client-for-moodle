@@ -17,7 +17,9 @@ import {
   QUIZ_ROUTE,
   LESSON_ROUTE,
   RESOURCE_ROUTE,
+  DISCUSSION_ROUTE,
 } from "./utils/consts";
+import { ForumDiscussion } from "./components/Discussion/Discussion";
 
 export const authRoutes = [
   {
@@ -31,6 +33,10 @@ export const authRoutes = [
   {
     path: FORUM_ROUTE,
     Component: ForumPage,
+  },
+  {
+    path: DISCUSSION_ROUTE,
+    Component: ForumDiscussion,
   },
   {
     path: ASSIGN_ROUTE,
