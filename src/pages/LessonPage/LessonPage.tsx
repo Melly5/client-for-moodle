@@ -34,6 +34,9 @@ export interface LessonPageI {
   timemodified: number;
   title: string;
   contents: string;
+  type: number;
+  typeid: number;
+  typestring: string;
 }
 
 const InitialState: LessonI = {
@@ -48,6 +51,9 @@ const InitialState: LessonI = {
     timemodified: 0,
     title: "",
     contents: "",
+    type: 0,
+    typeid: 0,
+    typestring: "",
   },
   answers: [
     {
@@ -111,11 +117,11 @@ export const LessonPage = () => {
       {lessonPage.page && (
         <div>
           <div className="m-5 font-bold">{lessonPage.page.title}</div>
-          <div>{parse(lessonPage.page.contents)}</div>
+          <div className="m-5">{parse(lessonPage.page.contents)}</div>
         </div>
       )}
-      {lessonPage.answers && (
-        <div>
+      {lessonPage.page.typestring == "Список разделов" &&
+        lessonPage.answers && (
           <div className="flex">
             {lessonPage.answers.map((answer: any, id: number) => (
               <button
@@ -127,8 +133,29 @@ export const LessonPage = () => {
               </button>
             ))}
           </div>
-        </div>
-      )}
+        )}
+      {lessonPage.page.typestring == "Множественный выбор" &&
+        lessonPage.answers && (
+          <div className="flex flex-col">
+            {lessonPage.answers.map((answer: any, id: number) => (
+              <label className="flex mx-16">
+                <input className="mx-3" type="radio" key={id} />
+                {parse(answer.answer)}
+              </label>
+            ))}
+          </div>
+        )}
+      {lessonPage.page.typestring == "На соответствие" &&
+        lessonPage.answers && (
+          <div className="flex flex-col">
+            {lessonPage.answers.map((answer: any, id: number) => (
+              <label className="flex mx-16">
+                <input className="mx-3" type="radio" key={id} />
+                {parse(answer.answer)}
+              </label>
+            ))}
+          </div>
+        )}
     </div>
   );
 };
