@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import parse from "html-react-parser";
@@ -70,39 +70,40 @@ const InitialState: LessonI = {
 
 export const LessonPage = () => {
   const { state } = useLocation();
-  const { name, instance, startPage } = state;
+  const { id, name, instance, startPage } = state;
   const [lessonPage, setLessonPage] = useState<LessonI>(InitialState);
+  let navigate = useNavigate();
 
-  //const [startPage, setStartPage] = useState<number>(0);
-  /*
+  const handleClickNextPage = (jump: number) => {
+    jump === -1 &&
+      navigate(`/lesson/${id + 1}`, {
+        state: {
+          id: id + 1,
+          name,
+          instance,
+          startPage: lessonPage.page.nextpageid,
+        },
+      });
+    jump === -40 &&
+      navigate(`/lesson/${id + 1}`, {
+        state: {
+          id,
+          name,
+          instance,
+          startPage: lessonPage.page.prevpageid,
+        },
+      });
+  };
+
   useEffect(() => {
     let apiLessonPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_page_data&moodlewsrestformat=json&lessonid=${instance}&pageid=${startPage}`;
-    let apiStartPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_pages&moodlewsrestformat=json&lessonid=${instance}`;
-
-    axios
-      .get(apiStartPage)
-      .then((response) => {
-        const data = response.data.pages[0].page.id;
-        setStartPage(data);
-        return axios.get(apiLessonPage);
-      })
-      .then((response) => {
-        setLessonPage(response.data);
-      })
-      .catch((error) => console.log(error.response));
-  }, [setLessonPage]);
-  console.log(lessonPage);
-*/
-  useEffect(() => {
-    let apiLessonPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_page_data&moodlewsrestformat=json&lessonid=${instance}&pageid=${startPage}`;
-    //let apiStartPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_pages&moodlewsrestformat=json&lessonid=${instance}`;
-
     const fetchData = async () => {
       const result = await axios(apiLessonPage);
       setLessonPage(result.data);
     };
     fetchData();
-  }, [setLessonPage]);
+    console.log(lessonPage);
+  }, [startPage]);
 
   return (
     <div className="w-5/6">
@@ -120,6 +121,7 @@ export const LessonPage = () => {
               <button
                 key={id}
                 className="mx-4 px-4 py-2 rounded-xl bg-blue-300"
+                onClick={() => handleClickNextPage(answer.jumpto)}
               >
                 {answer.answer}
               </button>

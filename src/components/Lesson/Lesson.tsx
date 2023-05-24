@@ -23,7 +23,6 @@ export const Lesson = (lesson: LessonI) => {
     const fetchStartPageData = async () => {
       const result = await axios(apiStartPage);
       setStartPage(result.data.pages[0].page.id);
-      console.log(startPage);
     };
     fetchStartPageData();
   };
@@ -31,6 +30,7 @@ export const Lesson = (lesson: LessonI) => {
   const handleClick = () => {
     navigate(`/lesson/${lesson.id}`, {
       state: {
+        id: lesson.id,
         name: lesson.name,
         instance: lesson.instance,
         startPage,
