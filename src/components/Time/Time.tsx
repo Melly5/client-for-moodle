@@ -1,4 +1,4 @@
-import { SimpleDateTime } from "react-simple-timestamp-to-date";
+import SimpleDateTime from "react-simple-timestamp-to-date";
 import { renderToString } from "react-dom/server";
 
 export interface Time {

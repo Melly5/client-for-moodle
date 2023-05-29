@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { authRoutes, publicRoutes } from "../routes";
+import { authRoutes, publicRoutes } from "../utils/api/constants/routes";
 import { Courses } from "../pages/CoursesList/Courses";
 import { PageLayout } from "./PageLayout";
 

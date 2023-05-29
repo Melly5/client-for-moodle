@@ -1,13 +1,13 @@
-import { AssignPage } from "./pages/AssignPage/AssignPage";
-import { FolderPage } from "./pages/FolderPage/FolderPage";
-import { ForumPage } from "./pages/ForumPage/ForumPage";
-import { LessonPage } from "./pages/LessonPage/LessonPage";
-import { QuizPage } from "./pages/QuizPage/QuizPage";
-import { ResourcePage } from "./pages/ResourcePage/ResourcePage";
-import { CoursePage } from "./pages/CoursePage/CoursePage";
-import { ForumDiscussion } from "./components/Discussion/Discussion";
-import { WebpagePage } from "./pages/WebpagePage.tsx/WebpagePage";
-import { Login } from "./pages/Login";
+import { AssignPage } from "../../../pages/AssignPage/AssignPage";
+import { FolderPage } from "../../../pages/FolderPage/FolderPage";
+import { ForumPage } from "../../../pages/ForumPage/ForumPage";
+import { LessonPage } from "../../../pages/LessonPage/LessonPage";
+import { QuizPage } from "../../../pages/QuizPage/QuizPage";
+import { ResourcePage } from "../../../pages/ResourcePage/ResourcePage";
+import { CoursePage } from "../../../pages/CoursePage/CoursePage";
+import { ForumDiscussion } from "../../../components/Discussion/Discussion";
+import { WebpagePage } from "../../../pages/WebpagePage.tsx/WebpagePage";
+import { Login } from "../../../pages/Login";
 
 import {
   LOGIN_ROUTE,
@@ -20,7 +20,7 @@ import {
   RESOURCE_ROUTE,
   DISCUSSION_ROUTE,
   PAGE_ROUTE,
-} from "./utils/consts";
+} from "./consts";
 
 export const authRoutes = [
   {
