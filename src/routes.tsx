@@ -18,8 +18,10 @@ import {
   LESSON_ROUTE,
   RESOURCE_ROUTE,
   DISCUSSION_ROUTE,
+  PAGE_ROUTE,
 } from "./utils/consts";
 import { ForumDiscussion } from "./components/Discussion/Discussion";
+import { WebpagePage } from "./pages/WebpagePage.tsx/WebpagePage";
 
 export const authRoutes = [
   {
@@ -53,6 +55,10 @@ export const authRoutes = [
   {
     path: RESOURCE_ROUTE,
     Component: ResourcePage,
+  },
+  {
+    path: PAGE_ROUTE,
+    Component: WebpagePage,
   },
 ];
 

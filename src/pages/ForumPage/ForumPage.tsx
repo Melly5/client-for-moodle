@@ -1,13 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import { AddForumDiscussion } from "../../components/Discussion/AddForumDiscussion";
 import { TimeParser } from "../../components/Time/Time";
 
 export const ForumPage = () => {
   const [discussions, setDiscussions] = useState<any[]>([]);
+
   const { state } = useLocation();
   const { id, name } = state;
+
   let navigate = useNavigate();
 
   useEffect(() => {

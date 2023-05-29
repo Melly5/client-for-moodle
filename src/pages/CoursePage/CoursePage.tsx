@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import parse from "html-react-parser";
 import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
-import { Folder } from "../../components/Folder/Folder";
-import { Forum } from "../../components/Forum/Forum";
-import { Assign } from "../../components/Assign/Assign";
-import { Quiz } from "../../components/Quiz/Quiz";
-import { Lesson } from "../../components/Lesson/Lesson";
-import { Resource } from "../../components/Resource/Resource";
-import { Label } from "../../components/Label/Label";
-import parse from "html-react-parser";
+
+import { Folder } from "../../components/courseList/Folder/Folder";
+import { Forum } from "../../components/courseList/Forum/Forum";
+import { Assign } from "../../components/courseList/Assign/Assign";
+import { Quiz } from "../../components/courseList/Quiz/Quiz";
+import { Lesson } from "../../components/courseList/Lesson/Lesson";
+import { Resource } from "../../components/courseList/Resource/Resource";
+import { Label } from "../../components/courseList/Label/Label";
+import { Webpage } from "../../components/courseList/Webpage/Webpage";
 
 export interface info {
   id: number;
@@ -59,6 +61,7 @@ export const CoursePage = () => {
                   {module.modname === "lesson" && <Lesson {...module} />}
                   {module.modname === "resource" && <Resource {...module} />}
                   {module.modname === "label" && <Label {...module} />}
+                  {module.modname === "page" && <Webpage {...module} />}
                 </div>
               ))}
             </div>

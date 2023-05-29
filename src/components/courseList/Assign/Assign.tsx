@@ -1,7 +1,7 @@
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-import { TimeParser } from "../Time/Time";
+import { TimeParser } from "../../Time/Time";
 
 export interface AssignComponentI {
   id: number;

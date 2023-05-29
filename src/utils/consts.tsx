@@ -8,3 +8,4 @@ export const QUIZ_ROUTE = "/quiz/:id";
 export const LESSON_ROUTE = "/lesson/:id";
 export const RESOURCE_ROUTE = "/resource/:id";
 export const DISCUSSION_ROUTE = "/discussion/:id";
+export const PAGE_ROUTE = "/page/:id";
