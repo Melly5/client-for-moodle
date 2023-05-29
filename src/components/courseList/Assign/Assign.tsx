@@ -8,6 +8,7 @@ export interface AssignComponentI {
   name: string;
   dates: [];
   contextid: number;
+  instance: number;
 }
 
 export interface AssignDate {
@@ -15,7 +16,12 @@ export interface AssignDate {
   timestamp: number;
 }
 
-export const Assign = (assign: AssignComponentI) => {
+export interface AssignProps {
+  assign: AssignComponentI;
+  courseid: string;
+}
+
+export const Assign = ({ assign, courseid }: AssignProps) => {
   let navigate = useNavigate();
 
   return (
@@ -23,7 +29,7 @@ export const Assign = (assign: AssignComponentI) => {
       className="p-4 text-white bg-blue-500 rounded-xl cursor-pointer"
       onClick={() =>
         navigate(`/assign/${assign.id}`, {
-          state: { id: assign.id },
+          state: { id: assign.instance, courseid },
         })
       }
     >

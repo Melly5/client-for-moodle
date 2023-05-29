@@ -60,7 +60,9 @@ export const CoursePage = () => {
                 >
                   {module.modname === "folder" && <Folder {...module} />}
                   {module.modname === "forum" && <Forum {...module} />}
-                  {module.modname === "assign" && <Assign {...module} />}
+                  {module.modname === "assign" && (
+                    <Assign assign={module} courseid={params.id as string} />
+                  )}
                   {module.modname === "quiz" && <Quiz {...module} />}
                   {module.modname === "lesson" && <Lesson {...module} />}
                   {module.modname === "resource" && <Resource {...module} />}
