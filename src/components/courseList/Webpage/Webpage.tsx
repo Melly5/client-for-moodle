@@ -1,7 +1,12 @@
 import { NewspaperIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-export const Webpage = (page: any) => {
+export interface WebpageProps {
+  page: any;
+  courseid: string;
+}
+
+export const Webpage = ({ page, courseid }: WebpageProps) => {
   let navigate = useNavigate();
 
   return (
@@ -12,6 +17,7 @@ export const Webpage = (page: any) => {
           navigate(`/page/${page.id}`, {
             state: {
               id: page.instance,
+              courseid,
             },
           })
         }

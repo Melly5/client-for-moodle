@@ -67,7 +67,9 @@ export const CoursePage = () => {
                   {module.modname === "lesson" && <Lesson {...module} />}
                   {module.modname === "resource" && <Resource {...module} />}
                   {module.modname === "label" && <Label {...module} />}
-                  {module.modname === "page" && <Webpage {...module} />}
+                  {module.modname === "page" && (
+                    <Webpage page={module} courseid={params.id as string} />
+                  )}
                 </div>
               ))}
             </div>

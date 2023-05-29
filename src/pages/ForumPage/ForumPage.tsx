@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { AddForumDiscussion } from "../../components/Discussion/AddForumDiscussion";
 import { TimeParser } from "../../components/Time/Time";
+import { Service } from "../../utils/api/requests";
 
 export const ForumPage = () => {
   const [discussions, setDiscussions] = useState<any[]>([]);
@@ -13,14 +14,17 @@ export const ForumPage = () => {
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_forum_get_forum_discussions&moodlewsrestformat=json&forumid=${id}`;
+  async function getForumDiscussions() {
+    try {
+      const response = await Service.getForumDiscussions(id);
+      setDiscussions(response.data.discussions);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-    axios.get(apiUrl).then((resp) => {
-      const data = resp.data;
-      setDiscussions(data.discussions);
-    });
-    console.log(discussions);
+  useEffect(() => {
+    getForumDiscussions();
   }, []);
 
   return (

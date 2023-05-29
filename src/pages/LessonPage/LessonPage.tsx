@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import parse from "html-react-parser";
+import { Service } from "../../utils/api/requests";
 
 export interface LessonI {
   page: LessonPageI;
@@ -101,14 +102,17 @@ export const LessonPage = () => {
       });
   };
 
+  async function getLessonPageContent() {
+    try {
+      const response = await Service.getLessonPageContent(instance, startPage);
+      setLessonPage(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
-    let apiLessonPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_page_data&moodlewsrestformat=json&lessonid=${instance}&pageid=${startPage}`;
-    const fetchData = async () => {
-      const result = await axios(apiLessonPage);
-      setLessonPage(result.data);
-    };
-    fetchData();
-    console.log(lessonPage);
+    getLessonPageContent();
   }, [startPage]);
 
   return (
