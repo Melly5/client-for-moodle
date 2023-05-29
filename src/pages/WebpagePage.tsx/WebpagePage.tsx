@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
+
 import { Service } from "../../utils/api/requests";
 
 export interface PageContent {
@@ -42,8 +42,6 @@ export const WebpagePage = () => {
   useEffect(() => {
     getWebpageContent();
   }, []);
-
-  console.log(pageContent);
 
   return (
     <>

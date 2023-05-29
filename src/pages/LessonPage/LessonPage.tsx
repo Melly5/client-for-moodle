@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import parse from "html-react-parser";
+
 import { Service } from "../../utils/api/requests";
 
 export interface LessonI {

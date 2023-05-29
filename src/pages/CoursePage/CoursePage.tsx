@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
-import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
 
 import { Folder } from "../../components/courseList/Folder/Folder";

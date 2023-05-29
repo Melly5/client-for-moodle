@@ -35,7 +35,6 @@ export const Service = {
     );
   },
   async getWebpageContent(id: string) {
-    console.log(id);
     return api.get(`${webpageContentUrl}&courseids[0]=${id}`);
   },
 };

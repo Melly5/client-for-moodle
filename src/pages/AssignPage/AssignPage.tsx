@@ -158,7 +158,9 @@ export const AssignPage = () => {
             {submissionStatus.plugins[0] && (
               <div>
                 {submissionStatus.plugins[0].editorfields[0].description} :
-                {parse(submissionStatus.plugins[0].editorfields[0].text)}
+                <div className="m-2 px-4 py-2 rounded-md bg-white">
+                  {parse(submissionStatus.plugins[0].editorfields[0].text)}
+                </div>
               </div>
             )}
           </div>

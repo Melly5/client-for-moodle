@@ -5,10 +5,11 @@ import { LessonPage } from "./pages/LessonPage/LessonPage";
 import { QuizPage } from "./pages/QuizPage/QuizPage";
 import { ResourcePage } from "./pages/ResourcePage/ResourcePage";
 import { CoursePage } from "./pages/CoursePage/CoursePage";
-import { Courses } from "./pages/CoursesList/Courses";
+import { ForumDiscussion } from "./components/Discussion/Discussion";
+import { WebpagePage } from "./pages/WebpagePage.tsx/WebpagePage";
 import { Login } from "./pages/Login";
+
 import {
-  MAIN_ROUTE,
   LOGIN_ROUTE,
   COURSE_ROUTE,
   FOLDER_ROUTE,
@@ -20,8 +21,6 @@ import {
   DISCUSSION_ROUTE,
   PAGE_ROUTE,
 } from "./utils/consts";
-import { ForumDiscussion } from "./components/Discussion/Discussion";
-import { WebpagePage } from "./pages/WebpagePage.tsx/WebpagePage";
 
 export const authRoutes = [
   {

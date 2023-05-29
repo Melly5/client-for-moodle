@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const AddForumDiscussion = (id: any) => {
   const [subject, setSubject] = useState("");

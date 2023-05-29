@@ -1,5 +1,5 @@
 import { File } from "../../pages/AssignPage/AssignPage";
-import { TimeParser, TimeUpToMinutes } from "../Time/Time";
+import { TimeParser } from "../Time/Time";
 
 export const FileItem = (content: File) => {
   let token1 = "2b8e54a638f0422b6859f223fa0a086e";
