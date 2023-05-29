@@ -11,29 +11,33 @@ import { Lesson } from "../../components/courseList/Lesson/Lesson";
 import { Resource } from "../../components/courseList/Resource/Resource";
 import { Label } from "../../components/courseList/Label/Label";
 import { Webpage } from "../../components/courseList/Webpage/Webpage";
+import { Service } from "../../utils/api/requests";
 
-export interface info {
+export interface CourseInfo {
   id: number;
   name: string;
   modules: [];
 }
 
 export const CoursePage = () => {
-  const [courseInfo, setCourseInfo] = useState<info[]>([]);
-  const token = "2b8e54a638f0422b6859f223fa0a086e";
-  const func = "core_course_get_contents";
+  const [courseInfo, setCourseInfo] = useState<CourseInfo[]>([]);
+
   const params = useParams();
   const { state } = useLocation();
   const { course } = state;
 
+  async function getCourseContent() {
+    try {
+      let id = params.id as string;
+      const response = await Service.getCourseContent(id);
+      setCourseInfo(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
-    const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=${token}&wsfunction=${func}&moodlewsrestformat=json&courseid=${params.id}`;
-    setTimeout(() => {
-      axios.get(apiUrl).then((resp) => {
-        const data = resp.data;
-        setCourseInfo(data);
-      });
-    });
+    getCourseContent();
   }, []);
 
   console.log(courseInfo);

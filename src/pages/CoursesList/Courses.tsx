@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { Course } from "./consts";
 import { CourseItem } from "../../components/Course/CourseItem";
+import { Service } from "../../utils/api/requests";
 
 export const Courses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const token = "2b8e54a638f0422b6859f223fa0a086e";
-  const func = "core_course_get_courses";
+
+  async function getCourses() {
+    try {
+      const response = await Service.getAllCourses();
+      setCourses(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
-    const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=${token}&wsfunction=${func}&moodlewsrestformat=json`;
-    axios.get(apiUrl).then((resp) => {
-      const allCourses = resp.data;
-      setCourses(allCourses);
-    });
+    getCourses();
   }, []);
 
   return (
@@ -25,9 +29,8 @@ export const Courses = () => {
         role="list"
         className="flex flex-wrap justify-between  relative divide-y p-10 "
       >
-        {courses.map((course, id) => (
-          <CourseItem key={id} {...course} />
-        ))}
+        {courses &&
+          courses.map((course, id) => <CourseItem key={id} {...course} />)}
       </div>
     </div>
   );
