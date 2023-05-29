@@ -1,12 +1,18 @@
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
-import SimpleDateTime from "react-simple-timestamp-to-date";
+
+import { TimeParser } from "../Time/Time";
 
 export interface AssignComponentI {
   id: number;
   name: string;
   dates: [];
   contextid: number;
+}
+
+export interface AssignDate {
+  label: string;
+  timestamp: number;
 }
 
 export const Assign = (assign: AssignComponentI) => {
@@ -29,7 +35,8 @@ export const Assign = (assign: AssignComponentI) => {
       <div className="flex flex-col">
         {assign.dates.map((date: any, id: number) => (
           <div key={id}>
-            {date.label} <SimpleDateTime>{date.timestamp}</SimpleDateTime>
+            {date.label}{" "}
+            <TimeParser timestamp={date.timestamp} type={"minutes"} />
           </div>
         ))}
       </div>

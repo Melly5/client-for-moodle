@@ -2,8 +2,9 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import parse from "html-react-parser";
+
 import { FileItem } from "../../components/File/File";
-import SimpleDateTime from "react-simple-timestamp-to-date";
+import { TimeParser } from "../../components/Time/Time";
 
 export interface Assignment {
   cmid: number;
@@ -43,35 +44,45 @@ export const AssignPage = () => {
   const [submissionStatus, setSubmissionStatus] = useState<any>();
   const { state } = useLocation();
   const { id } = state;
-  let token = "2b8e54a638f0422b6859f223fa0a086e";
 
   useEffect(() => {
     let apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_assignments&moodlewsrestformat=json&courseids[0]=3`;
+
+    axios.get(apiUrl).then((response) => {
+      getAssign(response.data.courses[0].assignments);
+    });
+
     let apiUrl1 = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_submissions&moodlewsrestformat=json&assignmentids[0]=${assigment.id}`;
+
+    axios.get(apiUrl1).then((response) => {
+      setSubmission(response.data.assignments[0].submissions[0]);
+    });
+
     let apiUrl2 = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_assign_get_submission_status&moodlewsrestformat=json&assignid=1`;
 
-    axios.all([axios.get(apiUrl), axios.get(apiUrl1), axios.get(apiUrl2)]).then(
+    axios.get(apiUrl2).then((response) => {
+      setSubmissionStatus(response.data.feedback);
+    });
+
+    /*    axios.all([axios.get(apiUrl), axios.get(apiUrl1), axios.get(apiUrl2)]).then(
       axios.spread((Assign, Submission, SubmissionStatus) => {
         getAssign(Assign.data.courses[0].assignments);
         setSubmission(Submission.data.assignments[0].submissions[0]);
         setSubmissionStatus(SubmissionStatus.data.feedback);
       })
-    );
-  }, []);
+    );*/
+  }, [setAssigment, setSubmission, setSubmissionStatus]);
 
   const getAssign = (data: Assignment[]) => {
     data.map((item: Assignment) => {
       item.cmid === id && setAssigment(item);
     });
   };
-  console.log(assigment);
-  console.log(submission);
-  console.log(submissionStatus);
 
   return (
     <div>
       {assigment && (
-        <>
+        <div className="p-5 m-5 bg-gray-100 rounded-xl">
           <div>Название: {assigment.name}</div>
           <div>Тема:{parse(assigment.intro)}</div>
           <div>Файлы:</div>
@@ -84,18 +95,20 @@ export const AssignPage = () => {
               ))}
           </div>
           <div>
-            Открыто:
-            <SimpleDateTime>
-              {assigment.allowsubmissionsfromdate}
-            </SimpleDateTime>
+            Открыто:{" "}
+            <TimeParser
+              timestamp={assigment.allowsubmissionsfromdate}
+              type={"minutes"}
+            />
           </div>
           <div>
-            Срок сдачи: <SimpleDateTime>{assigment.duedate}</SimpleDateTime>
+            Срок сдачи:{" "}
+            <TimeParser timestamp={assigment.duedate} type={"minutes"} />
           </div>
-        </>
+        </div>
       )}
       {submission && (
-        <>
+        <div className="p-5 m-5 bg-gray-100 rounded-xl">
           <div>
             Cостояние ответа:
             {submission.gradingstatus &&
@@ -117,15 +130,18 @@ export const AssignPage = () => {
                 </div>
               ))}
           </div>
-        </>
+        </div>
       )}
       {submissionStatus && (
-        <>
+        <div className="p-5 m-5 bg-gray-100 rounded-xl">
           Отзыв:
           <div>Оценка: {parse(submissionStatus.gradefordisplay)}</div>
           <div>
             Оценено в:{" "}
-            <SimpleDateTime>{submissionStatus.gradeddate}</SimpleDateTime>
+            <TimeParser
+              timestamp={submissionStatus.gradeddate}
+              type={"minutes"}
+            />
           </div>
           <div>
             {submissionStatus.plugins[0] && (
@@ -135,7 +151,7 @@ export const AssignPage = () => {
               </div>
             )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

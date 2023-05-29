@@ -1,9 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import parse from "html-react-parser";
-import SimpleDateTime from "react-simple-timestamp-to-date";
 import { AddForumDiscussion } from "../../components/Discussion/AddForumDiscussion";
+import { TimeParser } from "../../components/Time/Time";
 
 export const ForumPage = () => {
   const [discussions, setDiscussions] = useState<any[]>([]);
@@ -51,14 +50,17 @@ export const ForumPage = () => {
                 <td className="px-6 py-4 ">
                   <div>{discussion.userfullname}</div>
                   <div>
-                    <SimpleDateTime>{discussion.created}</SimpleDateTime>
+                    <TimeParser timestamp={discussion.created} type="days" />
                   </div>
                 </td>
                 <td className="px-6 py-4 ">
                   {" "}
                   <div>{discussion.usermodifiedfullname}</div>
                   <div>
-                    <SimpleDateTime>{discussion.timemodified}</SimpleDateTime>
+                    <TimeParser
+                      timestamp={discussion.timemodified}
+                      type="days"
+                    />
                   </div>
                 </td>
                 <td className="px-6 py-4 ">{discussion.numreplies}</td>
