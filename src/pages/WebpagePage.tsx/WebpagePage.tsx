@@ -1,52 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
 
-import { Service } from "../../utils/api/requests";
-
-export interface PageContent {
-  id: number;
-  name: string;
-  timemodified: number;
-  content: string;
-}
-
-const InitialState: PageContent = {
-  id: 0,
-  name: "",
-  timemodified: 0,
-  content: "",
-};
+import { AppDispatch } from "../../redux/store";
+import {
+  webpageProps,
+  getWebpageContent,
+  selectAllWebpageContent,
+} from "../../redux/slices/webpageSlice";
 
 export const WebpagePage = () => {
   const { state } = useLocation();
   const { id, courseid } = state;
 
-  const [pageContent, setPageContent] = useState<PageContent>(InitialState);
+  const dispatch = useDispatch<AppDispatch>();
 
-  async function getWebpageContent() {
-    try {
-      const response = await Service.getWebpageContent(courseid);
-      getPageContent(response.data.pages);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const getPageContent = (data: PageContent[]) => {
-    data.map((item: PageContent) => {
-      item.id === id && setPageContent(item);
-    });
+  const webpage = useSelector(selectAllWebpageContent);
+  const { webpageContent, status, error } = webpage;
+  let props: webpageProps = {
+    lessonid: id,
+    courseid,
   };
 
   useEffect(() => {
-    getWebpageContent();
-  }, []);
+    let isMounted = true;
+
+    if (status === "idle") {
+      dispatch(getWebpageContent(props));
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [status, dispatch]);
+
+  if (error !== "") return <div>Error: {error}</div>;
 
   return (
     <>
-      <div>{pageContent.name}</div>
-      <div>{parse(pageContent.content)}</div>
+      <div>{webpageContent.name}</div>
+      <div>{parse(webpageContent.content)}</div>
     </>
   );
 };
