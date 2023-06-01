@@ -1,45 +1,39 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
 
-import { AppDispatch } from "../../redux/store";
 import {
-  webpageProps,
-  getWebpageContent,
-  selectAllWebpageContent,
-} from "../../redux/slices/webpageSlice";
+  PageContent,
+  useGetWebpageContentQuery,
+} from "../../redux/slices/apiSlice";
 
 export const WebpagePage = () => {
   const { state } = useLocation();
   const { id, courseid } = state;
 
-  const dispatch = useDispatch<AppDispatch>();
+  const {
+    data: webpageContent,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetWebpageContentQuery(courseid);
 
-  const webpage = useSelector(selectAllWebpageContent);
-  const { webpageContent, status, error } = webpage;
-  let props: webpageProps = {
-    lessonid: id,
-    courseid,
+  const getPageContent = (data: any, id: number) => {
+    const temp = data.filter((item: PageContent) => item.id === id);
+    return temp[0];
   };
 
-  useEffect(() => {
-    let isMounted = true;
+  if (isError) return <div>Error: {error.toString()}</div>;
 
-    if (status === "idle") {
-      dispatch(getWebpageContent(props));
-    }
-    return () => {
-      isMounted = false;
-    };
-  }, [status, dispatch]);
+  if (isLoading) return <div className="font-bold text-2xl">Loading...</div>;
 
-  if (error !== "") return <div>Error: {error}</div>;
-
-  return (
-    <>
-      <div>{webpageContent.name}</div>
-      <div>{parse(webpageContent.content)}</div>
-    </>
-  );
+  if (isSuccess) {
+    let pageContent = getPageContent(webpageContent, id);
+    return (
+      <>
+        <div>{pageContent.name}</div>
+        <div>{parse(pageContent.content)}</div>
+      </>
+    );
+  }
 };

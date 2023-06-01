@@ -10,5 +10,4 @@ export const api = axios.create({
 });
 
 const token = "2b8e54a638f0422b6859f223fa0a086e";
-
 export const API = `/server.php?wstoken=${token}&moodlewsrestformat=json&wsfunction=`;

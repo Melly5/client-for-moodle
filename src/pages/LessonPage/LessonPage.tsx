@@ -1,15 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 import parse from "html-react-parser";
 
-import { AppDispatch } from "../../redux/store";
 import {
   LessonPageAnswersI,
   LessonProps,
-  getLessonPageContent,
-  selectAllLessonPageContent,
-} from "../../redux/slices/lessonSlice";
+  useGetLessonPageContentQuery,
+} from "../../redux/slices/apiSlice";
 
 export const LessonPage = () => {
   const { state } = useLocation();
@@ -23,7 +19,7 @@ export const LessonPage = () => {
           id: id + 1,
           name,
           instance,
-          startPage: lessonPageItems.page.nextpageid,
+          startPage: lessonPageItems?.page.nextpageid,
         },
       });
     jump === -40 &&
@@ -32,40 +28,29 @@ export const LessonPage = () => {
           id,
           name,
           instance,
-          startPage: lessonPageItems.page.prevpageid,
+          startPage: lessonPageItems?.page.prevpageid,
         },
       });
   };
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  const lesson = useSelector(selectAllLessonPageContent);
-  const { lessonPageItems, status, error } = lesson;
 
   let props: LessonProps = {
     lessonid: instance,
     startpageid: startPage,
   };
 
-  useEffect(() => {
-    let isMounted = true;
+  const {
+    data: lessonPageItems,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetLessonPageContentQuery(props);
 
-    if (status === "idle") {
-      dispatch(getLessonPageContent(props));
-    }
+  if (isError) return <div>Error: {error.toString()}</div>;
 
-    return () => {
-      isMounted = false;
-    };
-  }, [status, dispatch, startPage]);
-  //не происходит ререндер по клику
+  if (isLoading) return <div className="font-bold text-2xl">Loading...</div>;
 
-  if (error !== "") return <div>Error: {error}</div>;
-
-  if (status === "loading")
-    return <div className="font-bold text-2xl">Loading...</div>;
-
-  if (status === "successful")
+  if (isSuccess)
     return (
       <div className="w-5/6">
         <h4 className="m-5 text-xl font-bold">{name}</h4>

@@ -1,15 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-
-import { AppDispatch } from "../../redux/store";
-import {
-  ForumDiscussion,
-  getForumDiscussions,
-  selectAllForumDiscussions,
-} from "../../redux/slices/forumSlice";
 
 import { AddForumDiscussion } from "../../components/Discussion/AddForumDiscussion";
+import {
+  ForumDiscussion,
+  useGetForumDiscussionsQuery,
+} from "../../redux/slices/apiSlice";
 import { TimeParser } from "../../components/Time/Time";
 
 export const ForumPage = () => {
@@ -18,34 +13,23 @@ export const ForumPage = () => {
 
   let navigate = useNavigate();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const {
+    data: discussionItems,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetForumDiscussionsQuery(id);
 
-  const discussions = useSelector(selectAllForumDiscussions);
-  const { discussionItems, status, error } = discussions;
-
-  useEffect(() => {
-    let isMounted = true;
-
-    if (status === "idle") {
-      dispatch(getForumDiscussions(id));
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [status, dispatch]);
-
-  if (error !== "") return <div>Error: {error}</div>;
+  if (isError) return <div>Error: {error.toString()}</div>;
 
   return (
     <div>
       <div className="my-5 text-lg font-bold">{name}</div>
       <AddForumDiscussion id={id} />
-      {status === "loading" && (
-        <div className="font-bold text-2xl">Loading...</div>
-      )}
+      {isLoading && <div className="font-bold text-2xl">Loading...</div>}
 
-      {status === "successful" && (
+      {isSuccess && (
         <div className="rounded-lg">
           <table className="table-auto border border-collapse bg-gray-50">
             <thead>

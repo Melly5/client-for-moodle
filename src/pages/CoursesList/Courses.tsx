@@ -1,38 +1,21 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
 import { CourseItem } from "../../components/Course/CourseItem";
 
-import { AppDispatch } from "../../redux/store";
-import {
-  Course,
-  getCourses,
-  selectAllCourses,
-} from "../../redux/slices/coursesListSlice";
+import { Course, useGetCoursesQuery } from "../../redux/slices/apiSlice";
 
 export const Courses = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const {
+    data: courseCards,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetCoursesQuery();
 
-  const courses = useSelector(selectAllCourses);
-  const { courseCards, status, error } = courses;
+  if (isError) return <div>Error: {error.toString()}</div>;
 
-  useEffect(() => {
-    let isMounted = true;
+  if (isLoading) return <div className="font-bold text-2xl">Loading...</div>;
 
-    if (status === "idle") {
-      dispatch(getCourses());
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [status, dispatch]);
-  if (error !== "") return <div>Error: {error}</div>;
-
-  if (status === "loading")
-    return <div className="font-bold text-2xl">Loading...</div>;
-
-  if (status === "successful")
+  if (isSuccess)
     return (
       <div className=" 2xl:w-11/12 xl:w-11/12 lg:w-5/6  ">
         <label className="block text-gray-700 text-3xl font-bold mb-2">
