@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { FileItem } from "../../components/File/File";
+import FileItem from "../../components/File/File";
 
 export const ResourcePage = () => {
   const { state } = useLocation();

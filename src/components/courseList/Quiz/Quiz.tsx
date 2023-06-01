@@ -19,3 +19,4 @@ export const Quiz = (quiz: any) => {
     </div>
   );
 };
+export default Quiz;

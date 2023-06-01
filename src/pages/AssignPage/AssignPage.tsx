@@ -2,8 +2,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 
-import { FileItem } from "../../components/File/File";
-import { TimeParser } from "../../components/Time/Time";
+import FileItem from "../../components/File/File";
+import TimeParser from "../../components/Time/Time";
 import { Service } from "../../utils/api/requests";
 
 export interface Assignment {

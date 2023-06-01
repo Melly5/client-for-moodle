@@ -6,7 +6,7 @@ export interface WebpageProps {
   courseid: string;
 }
 
-export const Webpage = ({ page, courseid }: WebpageProps) => {
+const Webpage = ({ page, courseid }: WebpageProps) => {
   let navigate = useNavigate();
 
   return (
@@ -27,3 +27,5 @@ export const Webpage = ({ page, courseid }: WebpageProps) => {
     </div>
   );
 };
+
+export default Webpage;

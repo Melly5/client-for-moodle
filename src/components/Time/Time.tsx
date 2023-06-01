@@ -1,5 +1,6 @@
 import SimpleDateTime from "react-simple-timestamp-to-date";
 import { renderToString } from "react-dom/server";
+import { Suspense } from "react";
 
 export interface Time {
   timestamp: number;
@@ -11,7 +12,7 @@ export interface arrayTime {
   arrTime: string[];
 }
 
-export const TimeParser = ({ timestamp, type }: Time) => {
+const TimeParser = ({ timestamp, type }: Time) => {
   let arrDate: number[] = [];
   let arrTime: string[] = [];
   let data = renderToString(<SimpleDateTime>{timestamp}</SimpleDateTime>);
@@ -20,7 +21,7 @@ export const TimeParser = ({ timestamp, type }: Time) => {
   arrTime = data.split(" ").slice(3, 6);
 
   return (
-    <>
+    <Suspense fallback={<p>loading</p>}>
       {type === "days" && <TimeUpToDays {...arrDate} />}
       {type === "minutes" && (
         <TimeUpToMinutes arrDate={arrDate} arrTime={arrTime} />
@@ -28,9 +29,10 @@ export const TimeParser = ({ timestamp, type }: Time) => {
       {type === "seconds" && (
         <TimeUpToSeconds arrDate={arrDate} arrTime={arrTime} />
       )}
-    </>
+    </Suspense>
   );
 };
+export default TimeParser;
 
 let days = [
   "воскресенье",

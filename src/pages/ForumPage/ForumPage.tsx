@@ -1,11 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-import { AddForumDiscussion } from "../../components/Discussion/AddForumDiscussion";
+const AddForumDiscussion = lazy(
+  () => import("../../components/Discussion/AddForumDiscussion")
+);
+
 import {
   ForumDiscussion,
   useGetForumDiscussionsQuery,
 } from "../../redux/slices/apiSlice";
-import { TimeParser } from "../../components/Time/Time";
+
+import TimeParser from "../../components/Time/Time";
 
 export const ForumPage = () => {
   const { state } = useLocation();
@@ -26,7 +31,9 @@ export const ForumPage = () => {
   return (
     <div>
       <div className="my-5 text-lg font-bold">{name}</div>
-      <AddForumDiscussion id={id} />
+      <Suspense fallback={<p>loading</p>}>
+        <AddForumDiscussion id={id} />
+      </Suspense>
       {isLoading && <div className="font-bold text-2xl">Loading...</div>}
 
       {isSuccess && (

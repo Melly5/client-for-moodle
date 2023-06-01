@@ -1,14 +1,20 @@
 import { useLocation, useParams } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import parse from "html-react-parser";
 
-import { Folder } from "../../components/courseList/Folder/Folder";
-import { Forum } from "../../components/courseList/Forum/Forum";
-import { Assign } from "../../components/courseList/Assign/Assign";
-import { Quiz } from "../../components/courseList/Quiz/Quiz";
-import { Lesson } from "../../components/courseList/Lesson/Lesson";
-import { Resource } from "../../components/courseList/Resource/Resource";
-import { Label } from "../../components/courseList/Label/Label";
-import { Webpage } from "../../components/courseList/Webpage/Webpage";
+const Folder = lazy(() => import("../../components/courseList/Folder/Folder"));
+const Forum = lazy(() => import("../../components/courseList/Forum/Forum"));
+const Assign = lazy(() => import("../../components/courseList/Assign/Assign"));
+const Quiz = lazy(() => import("../../components/courseList/Quiz/Quiz"));
+const Lesson = lazy(() => import("../../components/courseList/Lesson/Lesson"));
+const Resource = lazy(
+  () => import("../../components/courseList/Resource/Resource")
+);
+const Label = lazy(() => import("../../components/courseList/Label/Label"));
+const Webpage = lazy(
+  () => import("../../components/courseList/Webpage/Webpage")
+);
+
 import { CourseInfo, useGetCourseInfoQuery } from "../../redux/slices/apiSlice";
 
 export const CoursePage = () => {
@@ -48,18 +54,25 @@ export const CoursePage = () => {
                     key={id}
                     className="flex content-center my-3 cursor-pointer"
                   >
-                    {module.modname === "folder" && <Folder {...module} />}
-                    {module.modname === "forum" && <Forum {...module} />}
-                    {module.modname === "assign" && (
-                      <Assign assign={module} courseid={params.id as string} />
-                    )}
-                    {module.modname === "quiz" && <Quiz {...module} />}
-                    {module.modname === "lesson" && <Lesson {...module} />}
-                    {module.modname === "resource" && <Resource {...module} />}
-                    {module.modname === "label" && <Label {...module} />}
-                    {module.modname === "page" && (
-                      <Webpage page={module} courseid={params.id as string} />
-                    )}
+                    <Suspense fallback={<p>loading</p>}>
+                      {module.modname === "folder" && <Folder {...module} />}
+                      {module.modname === "forum" && <Forum {...module} />}
+                      {module.modname === "assign" && (
+                        <Assign
+                          assign={module}
+                          courseid={params.id as string}
+                        />
+                      )}
+                      {module.modname === "quiz" && <Quiz {...module} />}
+                      {module.modname === "lesson" && <Lesson {...module} />}
+                      {module.modname === "resource" && (
+                        <Resource {...module} />
+                      )}
+                      {module.modname === "label" && <Label {...module} />}
+                      {module.modname === "page" && (
+                        <Webpage page={module} courseid={params.id as string} />
+                      )}
+                    </Suspense>
                   </div>
                 ))}
               </div>

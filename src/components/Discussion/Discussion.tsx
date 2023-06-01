@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-export const ForumDiscussion = () => {
+const ForumDiscussion = () => {
   const [discussion, setDiscussion] = useState<any[]>([]);
   let params = useParams();
   const { state } = useLocation();
@@ -35,3 +35,4 @@ export const ForumDiscussion = () => {
     </div>
   );
 };
+export default ForumDiscussion;

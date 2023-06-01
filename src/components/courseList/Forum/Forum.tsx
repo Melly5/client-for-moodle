@@ -7,7 +7,7 @@ export interface ForumI {
   name: string;
 }
 
-export const Forum = (forum: ForumI) => {
+const Forum = (forum: ForumI) => {
   let navigate = useNavigate();
 
   return (
@@ -25,3 +25,4 @@ export const Forum = (forum: ForumI) => {
     </div>
   );
 };
+export default Forum;

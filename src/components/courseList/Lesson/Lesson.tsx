@@ -13,7 +13,7 @@ export interface LessonI {
   url: string;
 }
 
-export const Lesson = (lesson: LessonI) => {
+const Lesson = (lesson: LessonI) => {
   let navigate = useNavigate();
   const [startPage, setStartPage] = useState<number>(0);
 
@@ -47,3 +47,4 @@ export const Lesson = (lesson: LessonI) => {
     </div>
   );
 };
+export default Lesson;

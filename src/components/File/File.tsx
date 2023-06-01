@@ -1,7 +1,9 @@
 import { File } from "../../pages/AssignPage/AssignPage";
-import { TimeParser } from "../Time/Time";
+import { lazy } from "react";
 
-export const FileItem = (content: File) => {
+const TimeParser = lazy(() => import("../Time/Time"));
+
+const FileItem = (content: File) => {
   let token1 = "2b8e54a638f0422b6859f223fa0a086e";
 
   return (
@@ -22,3 +24,4 @@ export const FileItem = (content: File) => {
     </div>
   );
 };
+export default FileItem;

@@ -18,7 +18,7 @@ export interface FileContents {
   userid: number;
 }
 
-export const Resource = (resource: any) => {
+const Resource = (resource: any) => {
   return (
     <div className=" flex">
       <ClipboardDocumentIcon className="h-6 w-6 mr-3" aria-hidden="true" />
@@ -33,3 +33,5 @@ export const Resource = (resource: any) => {
     </div>
   );
 };
+
+export default Resource;

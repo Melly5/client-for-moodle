@@ -5,7 +5,7 @@ import { LessonPage } from "../../../pages/LessonPage/LessonPage";
 import { QuizPage } from "../../../pages/QuizPage/QuizPage";
 import { ResourcePage } from "../../../pages/ResourcePage/ResourcePage";
 import { CoursePage } from "../../../pages/CoursePage/CoursePage";
-import { ForumDiscussion } from "../../../components/Discussion/Discussion";
+import ForumDiscussion from "../../../components/Discussion/Discussion";
 import { WebpagePage } from "../../../pages/WebpagePage.tsx/WebpagePage";
 import { Login } from "../../../pages/Login";
 

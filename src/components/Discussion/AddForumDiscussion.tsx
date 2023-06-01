@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export const AddForumDiscussion = (id: any) => {
+const AddForumDiscussion = (id: any) => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
@@ -61,3 +61,4 @@ export const AddForumDiscussion = (id: any) => {
     </div>
   );
 };
+export default AddForumDiscussion;

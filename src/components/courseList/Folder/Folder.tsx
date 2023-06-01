@@ -7,7 +7,7 @@ export interface FolderI {
   contents: string;
 }
 
-export const Folder = (folder: FolderI) => {
+const Folder = (folder: FolderI) => {
   let navigate = useNavigate();
 
   return (
@@ -25,3 +25,5 @@ export const Folder = (folder: FolderI) => {
     </div>
   );
 };
+
+export default Folder;

@@ -1,7 +1,8 @@
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
+import { lazy } from "react";
 
-import { TimeParser } from "../../Time/Time";
+const TimeParser = lazy(() => import("../../Time/Time"));
 
 export interface AssignComponentI {
   id: number;
@@ -21,7 +22,7 @@ export interface AssignProps {
   courseid: string;
 }
 
-export const Assign = ({ assign, courseid }: AssignProps) => {
+const Assign = ({ assign, courseid }: AssignProps) => {
   let navigate = useNavigate();
 
   return (
@@ -41,7 +42,7 @@ export const Assign = ({ assign, courseid }: AssignProps) => {
       <div className="flex flex-col">
         {assign.dates.map((date: any, id: number) => (
           <div key={id}>
-            {date.label}{" "}
+            {date.label}
             <TimeParser timestamp={date.timestamp} type={"minutes"} />
           </div>
         ))}
@@ -49,3 +50,4 @@ export const Assign = ({ assign, courseid }: AssignProps) => {
     </div>
   );
 };
+export default Assign;
