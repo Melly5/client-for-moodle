@@ -14,6 +14,16 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
+      "@hooks": ["./src/hooks"],
+      "@modules/*": ["./src/modules/*"],
+      "@services/*": ["./src/services/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@store": ["./src/store"],
+      "@utils/*": ["./src/utils/*"],
+      "@config/*": ["config/*"],
+      "@types": ["./src/types.ts"],
+      "@public/*": ["./public/"],
+      "@redux/*": ["./src/redux/*"],
       "*": ["./src/*"]
     },
     /* Linting */
