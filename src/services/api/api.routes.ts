@@ -1,13 +1,13 @@
-import { AssignPage } from "../../../modules/AssignPage/AssignPage.module";
-import { FolderPage } from "../../../modules/FolderPage/FolderPage.module";
-import { ForumPage } from "../../../modules/ForumPage/ForumPage.module";
-import { LessonPage } from "../../../modules/LessonPage/LessonPage.module";
-import { QuizPage } from "../../../modules/QuizPage/QuizPage.module";
-import { ResourcePage } from "../../../modules/ResourcePage/ResourcePage.module";
-import { CoursePage } from "../../../modules/CoursePage/CoursePage.module";
-import ForumDiscussion from "../../../modules/CoursePage/components/moduleItems/Discussion/Discussion.component";
-import { WebpagePage } from "../../../modules/WebpagePage/WebpagePage.module";
-import { Login } from "../../../modules/Login.module";
+import { AssignPage } from "modules/AssignPage/AssignPage.module";
+import { FolderPage } from "modules/FolderPage/FolderPage.module";
+import { ForumPage } from "modules/ForumPage/ForumPage.module";
+import { LessonPage } from "modules/LessonPage/LessonPage.module";
+import { QuizPage } from "modules/QuizPage/QuizPage.module";
+import { ResourcePage } from "modules/ResourcePage/ResourcePage.module";
+import { CoursePage } from "modules/CoursePage/CoursePage.module";
+import ForumDiscussion from "modules/CoursePage/components/moduleItems/Discussion/Discussion.component";
+import { WebpagePage } from "modules/WebpagePage/WebpagePage.module";
+import { Login } from "modules/Login.module";
 
 import {
   LOGIN_ROUTE,
@@ -20,7 +20,7 @@ import {
   RESOURCE_ROUTE,
   DISCUSSION_ROUTE,
   PAGE_ROUTE,
-} from "./consts";
+} from "./api.constants";
 
 export const authRoutes = [
   {
