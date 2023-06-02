@@ -8,6 +8,7 @@ import { CoursePage } from "../../modules/CoursePage/CoursePage.module";
 import ForumDiscussion from "../../modules/CoursePage/components/moduleItems/Discussion/Discussion.component";
 import { WebpagePage } from "../../modules/WebpagePage/WebpagePage.module";
 import { Login } from "../../modules/Login.module";
+import { QuizAttemptPage } from "../../modules/QuizPage/QuizAttemptPage.module";
 
 import {
   LOGIN_ROUTE,
@@ -20,6 +21,7 @@ import {
   RESOURCE_ROUTE,
   DISCUSSION_ROUTE,
   PAGE_ROUTE,
+  QUIZ_ATTEMPT_ROUTE,
 } from "./api.constants";
 
 export const authRoutes = [
@@ -58,6 +60,10 @@ export const authRoutes = [
   {
     path: PAGE_ROUTE,
     Component: WebpagePage,
+  },
+  {
+    path: QUIZ_ATTEMPT_ROUTE,
+    Component: QuizAttemptPage,
   },
 ];
 

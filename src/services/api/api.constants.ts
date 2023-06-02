@@ -9,3 +9,4 @@ export const LESSON_ROUTE = "/lesson/:id";
 export const RESOURCE_ROUTE = "/resource/:id";
 export const DISCUSSION_ROUTE = "/discussion/:id";
 export const PAGE_ROUTE = "/page/:id";
+export const QUIZ_ATTEMPT_ROUTE = "/quizpage/:id";

@@ -1,39 +1,47 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 import axios from "axios";
 
-export interface Quiz {
-  attempt: [];
-  currentpage: number;
-  state: string;
-  messages: [];
-  questions: [];
-}
+import { Article } from "../../shared/Article/Article";
+import {
+  useGetQuizAccessInformationQuery,
+  useGetQuizStartAttemptQuery,
+} from "../../services/api/api.service";
 
 export const QuizPage = () => {
-  const [discussions, setDiscussions] = useState<Quiz>();
+  let navigate = useNavigate();
   const { state } = useLocation();
-  const { name } = state;
-  useEffect(() => {
-    const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_quiz_get_attempt_data&moodlewsrestformat=json&attemptid=2&page=0`;
-    setTimeout(() => {
-      axios.get(apiUrl).then((resp) => {
-        const data = resp.data;
-        setDiscussions(data);
-      });
-    });
-  }, []);
+  const { id, name } = state;
 
-  console.log(discussions);
+  const {
+    data: quizAccessInfo,
+    isLoading,
+    isSuccess,
+  } = useGetQuizAccessInformationQuery(id);
+
+  const { data: quizAttemptInfo } = useGetQuizStartAttemptQuery(id);
+  console.log(quizAttemptInfo);
+  const startAttemptOnClick = () => {
+    navigate(`/quizpage/${quizAttemptInfo.attempt.currentpage}`, {
+      state: { id: quizAttemptInfo.id },
+    });
+  };
+
   return (
     <div>
-      <div>{name}</div>
+      <Article>{name}</Article>
       <div>
-        {discussions?.questions.map((question: any) => (
-          <div>{parse(question.html)}</div>
+        {quizAccessInfo?.accessrules.map((question: any, id: number) => (
+          <div key={id}>{question}</div>
         ))}
       </div>
+      <button
+        className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
+        onClick={startAttemptOnClick}
+      >
+        Начать попытку
+      </button>
     </div>
   );
 };

@@ -39,7 +39,7 @@ export const CoursePage: FC = () => {
   let id = params.id as string;
 
   const { data: courseItems, isLoading } = useGetCourseInfoQuery(id);
-
+  console.log(courseItems);
   return (
     <>
       {isLoading ? (

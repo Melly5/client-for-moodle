@@ -12,6 +12,9 @@ const submissionStatusUrl = `${API}mod_assign_get_submission_status`;
 const forumDiscussionsUrl = `${API}mod_forum_get_forum_discussions`;
 const lessonPageContentUrl = `${API}mod_lesson_get_page_data`;
 const webpageContentUrl = `${API}mod_page_get_pages_by_courses`;
+const quizAccessInfoUrl = `${API}mod_quiz_get_quiz_access_information`;
+const quizAttemptDataUrl = `${API}mod_quiz_get_attempt_data`;
+const quizStartAttemptUrl = `${API}mod_quiz_start_attempt`;
 
 export const baseApi = createApi({
   reducerPath: "api",
@@ -54,6 +57,20 @@ export const baseApi = createApi({
       },
       transformResponse: (response: Webpage) => response.pages as PageContent,
     }),
+    getQuizAccessInformation: builder.query<any, number>({
+      query: (id) => ({ url: `${quizAccessInfoUrl}&quizid=${id}` }),
+    }),
+    getQuizStartAttempt: builder.query<any, number>({
+      query: (id) => ({ url: `${quizStartAttemptUrl}&quizid=${id}` }),
+    }),
+    getQuizAttemptData: builder.query<any, QuizAttemptProps>({
+      query: (args) => {
+        const { attemptid, page } = args;
+        return {
+          url: `${quizAttemptDataUrl}&attemptid=${attemptid}&page=${page}`,
+        };
+      },
+    }),
   }),
 });
 
@@ -66,7 +83,15 @@ export const {
   useGetLessonPageContentQuery,
   useGetSubmissionStatusQuery,
   useGetWebpageContentQuery,
+  useGetQuizAccessInformationQuery,
+  useGetQuizAttemptDataQuery,
+  useGetQuizStartAttemptQuery,
 } = baseApi;
+
+export interface QuizAttemptProps {
+  attemptid: number;
+  page: number;
+}
 
 export interface Course {
   id: number;
