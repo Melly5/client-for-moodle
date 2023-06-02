@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
+
 import { navigationIcons, icons } from "./consts";
 
 export const NavBar = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { CourseItem } from "./components/CourseItem";
-import { Course, useGetCoursesQuery } from "redux/slices/apiSlice";
+import { Course, useGetCoursesQuery } from "../../redux/slices/apiSlice";
 
 export const Courses: React.FC = () => {
   const { data: courseCards, isLoading } = useGetCoursesQuery();

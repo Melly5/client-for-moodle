@@ -5,13 +5,9 @@ const AddForumDiscussion = lazy(
   () => import("./components/AddForumDiscussion")
 );
 
-import {
-  ForumDiscussion,
-  useGetForumDiscussionsQuery,
-} from "redux/slices/apiSlice";
+import TimeParser from "../../shared/Time/Time";
 
-import TimeParser from "@shared/Time/Time";
-import { Article } from "@shared/Article/Article";
+import { useGetForumDiscussionsQuery } from "../../services/api";
 
 export const ForumPage = () => {
   const { state } = useLocation();
@@ -23,11 +19,7 @@ export const ForumPage = () => {
     data: discussionItems,
     isLoading,
     isSuccess,
-    isError,
-    error,
   } = useGetForumDiscussionsQuery(id);
-
-  if (isError) return <div>Error: {error.toString()}</div>;
 
   return (
     <div>

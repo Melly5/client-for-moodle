@@ -5,8 +5,8 @@ import {
   LessonPageAnswersI,
   LessonProps,
   useGetLessonPageContentQuery,
-} from "redux/slices/apiSlice";
-import { Article } from "@shared/Article/Article";
+} from "../../redux/slices/apiSlice";
+import { Article } from "../../shared/Article/Article";
 
 export const LessonPage = () => {
   const { state } = useLocation();
@@ -39,68 +39,64 @@ export const LessonPage = () => {
     startpageid: startPage,
   };
 
-  const {
-    data: lessonPageItems,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetLessonPageContentQuery(props);
+  const { data: lessonPageItems, isLoading } =
+    useGetLessonPageContentQuery(props);
 
-  if (isError) return <div>Error: {error.toString()}</div>;
-
-  if (isLoading) return <div className="font-bold text-2xl">Loading...</div>;
-
-  if (isSuccess)
-    return (
-      <div className="w-5/6">
-        <Article>{name}</Article>
-        {lessonPageItems.page && (
-          <div>
-            <div className="m-5 font-bold">{lessonPageItems.page.title}</div>
-            <div className="m-5 textItem">
-              {parse(lessonPageItems.page.contents)}
-            </div>
-          </div>
-        )}
-        {lessonPageItems.page.typestring == "Список разделов" &&
-          lessonPageItems.answers && (
-            <div className="flex">
-              {lessonPageItems.answers.map(
-                (answer: LessonPageAnswersI, id: number) => (
-                  <button
-                    key={id}
-                    className="mx-4 px-4 py-2 rounded-xl bg-blue-300"
-                    onClick={() => handleClickNextPage(answer.jumpto)}
-                  >
-                    {answer.answer}
-                  </button>
-                )
-              )}
+  return (
+    <>
+      {isLoading ? (
+        <div className="font-bold text-2xl">Loading...</div>
+      ) : (
+        <div className="w-5/6">
+          <Article>{name}</Article>
+          {lessonPageItems?.page && (
+            <div>
+              <div className="m-5 font-bold">{lessonPageItems.page.title}</div>
+              <div className="m-5 textItem">
+                {parse(lessonPageItems.page.contents)}
+              </div>
             </div>
           )}
-        {lessonPageItems.page.typestring == "Множественный выбор" &&
-          lessonPageItems.answers && (
-            <div className="flex flex-col">
-              {lessonPageItems.answers.map((answer: any, id: number) => (
-                <label className="flex mx-16">
-                  <input className="mx-3" type="radio" key={id} />
-                  {parse(answer.answer)}
-                </label>
-              ))}
-            </div>
-          )}
-        {lessonPageItems.page.typestring == "На соответствие" &&
-          lessonPageItems.answers && (
-            <div className="flex flex-col">
-              {lessonPageItems.answers.map((answer: any, id: number) => (
-                <label className="flex mx-16">
-                  <input className="mx-3" type="radio" key={id} />
-                  {parse(answer.answer)}
-                </label>
-              ))}
-            </div>
-          )}
-      </div>
-    );
+          {lessonPageItems?.page.typestring == "Список разделов" &&
+            lessonPageItems.answers && (
+              <div className="flex">
+                {lessonPageItems.answers.map(
+                  (answer: LessonPageAnswersI, id: number) => (
+                    <button
+                      key={id}
+                      className="mx-4 px-4 py-2 rounded-xl bg-blue-300"
+                      onClick={() => handleClickNextPage(answer.jumpto)}
+                    >
+                      {answer.answer}
+                    </button>
+                  )
+                )}
+              </div>
+            )}
+          {lessonPageItems?.page.typestring == "Множественный выбор" &&
+            lessonPageItems.answers && (
+              <div className="flex flex-col">
+                {lessonPageItems.answers.map((answer: any, id: number) => (
+                  <label className="flex mx-16">
+                    <input className="mx-3" type="radio" key={id} />
+                    {parse(answer.answer)}
+                  </label>
+                ))}
+              </div>
+            )}
+          {lessonPageItems?.page.typestring == "На соответствие" &&
+            lessonPageItems.answers && (
+              <div className="flex flex-col">
+                {lessonPageItems.answers.map((answer: any, id: number) => (
+                  <label className="flex mx-16">
+                    <input className="mx-3" type="radio" key={id} />
+                    {parse(answer.answer)}
+                  </label>
+                ))}
+              </div>
+            )}
+        </div>
+      )}
+    </>
+  );
 };

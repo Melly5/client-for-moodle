@@ -2,11 +2,11 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 
-import FileItem from "@shared/File/File";
-import TimeParser from "@shared/Time/Time";
-import { Article } from "@shared/Article/Article";
+import FileItem from "../../shared/File/File";
+import TimeParser from "../../shared/Time/Time";
+import { Article } from "../../shared/Article/Article";
 
-import { Service } from "@utils/api/requests";
+import { Service } from "../../utils/api/requests";
 import { Assignment, InitialState } from "./AssignPage.types";
 
 export const AssignPage = () => {
