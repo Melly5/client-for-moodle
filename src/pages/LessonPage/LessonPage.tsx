@@ -58,7 +58,9 @@ export const LessonPage = () => {
         {lessonPageItems.page && (
           <div>
             <div className="m-5 font-bold">{lessonPageItems.page.title}</div>
-            <div className="m-5">{parse(lessonPageItems.page.contents)}</div>
+            <div className="m-5 textItem">
+              {parse(lessonPageItems.page.contents)}
+            </div>
           </div>
         )}
         {lessonPageItems.page.typestring == "Список разделов" &&

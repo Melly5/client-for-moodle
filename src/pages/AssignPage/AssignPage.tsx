@@ -99,7 +99,7 @@ export const AssignPage = () => {
           <Article>{assignment.name}</Article>
           {assignment.intro && (
             <div>
-              Тема:<div className="m-2">{parse(assignment.intro)}</div>
+              Тема:<div className="m-2 textItem">{parse(assignment.intro)}</div>
             </div>
           )}
 

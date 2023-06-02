@@ -33,7 +33,7 @@ export const WebpagePage = () => {
     return (
       <>
         <Article>{pageContent.name}</Article>
-        <div>{parse(pageContent.content)}</div>
+        <div className="textItem">{parse(pageContent.content)}</div>
       </>
     );
   }
