@@ -2,46 +2,12 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 
-import FileItem from "../../shared/File/File";
-import TimeParser from "../../shared/Time/Time";
-import { Service } from "../../utils/api/requests";
-import { Article } from "../../shared/Article/Article";
+import FileItem from "@shared/File/File";
+import TimeParser from "@shared/Time/Time";
+import { Article } from "@shared/Article/Article";
 
-export interface Assignment {
-  id: number;
-  cmid: number;
-  course: number;
-  name: string;
-  configs: [];
-  introattachments: [];
-  activity: string;
-  intro: string;
-  duedate: number;
-  allowsubmissionsfromdate: number;
-}
-
-export interface File {
-  filename: string;
-  filepath: string;
-  filesize: number;
-  fileurl: string;
-  isexternalfile: boolean;
-  mimetype: string;
-  timemodified: number;
-}
-
-const InitialState: Assignment = {
-  id: 0,
-  cmid: 0,
-  course: 0,
-  name: "",
-  configs: [],
-  introattachments: [],
-  activity: "",
-  intro: "",
-  duedate: 0,
-  allowsubmissionsfromdate: 0,
-};
+import { Service } from "@utils/api/requests";
+import { Assignment, InitialState } from "./AssignPage.types";
 
 export const AssignPage = () => {
   const [assignment, setAssignment] = useState<Assignment>(InitialState);

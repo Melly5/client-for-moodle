@@ -8,10 +8,10 @@ const AddForumDiscussion = lazy(
 import {
   ForumDiscussion,
   useGetForumDiscussionsQuery,
-} from "../../redux/slices/apiSlice";
+} from "redux/slices/apiSlice";
 
-import TimeParser from "../../shared/Time/Time";
-import { Article } from "../../shared/Article/Article";
+import TimeParser from "@shared/Time/Time";
+import { Article } from "@shared/Article/Article";
 
 export const ForumPage = () => {
   const { state } = useLocation();

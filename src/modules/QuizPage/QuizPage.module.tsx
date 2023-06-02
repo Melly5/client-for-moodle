@@ -1,7 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import parse from "html-react-parser";
+import axios from "axios";
+
 export interface Quiz {
   attempt: [];
   currentpage: number;
@@ -9,10 +10,11 @@ export interface Quiz {
   messages: [];
   questions: [];
 }
+
 export const QuizPage = () => {
   const [discussions, setDiscussions] = useState<Quiz>();
   const { state } = useLocation();
-  const { id, name } = state;
+  const { name } = state;
   useEffect(() => {
     const apiUrl = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_quiz_get_attempt_data&moodlewsrestformat=json&attemptid=2&page=0`;
     setTimeout(() => {

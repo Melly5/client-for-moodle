@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
-import FileItem from "../../shared/File/File";
 import { Suspense } from "react";
+
+import FileItem from "@shared/File/File";
+
 export const FolderPage = () => {
   const { state } = useLocation();
   const { name, content } = state;

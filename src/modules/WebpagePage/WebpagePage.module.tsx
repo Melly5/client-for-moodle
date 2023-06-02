@@ -1,11 +1,8 @@
 import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
 
-import {
-  PageContent,
-  useGetWebpageContentQuery,
-} from "../../redux/slices/apiSlice";
-import { Article } from "../../shared/Article/Article";
+import { Article } from "@shared/Article/Article";
+import { PageContent, useGetWebpageContentQuery } from "redux/slices/apiSlice";
 
 export const WebpagePage = () => {
   const { state } = useLocation();

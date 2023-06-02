@@ -5,8 +5,8 @@ import {
   LessonPageAnswersI,
   LessonProps,
   useGetLessonPageContentQuery,
-} from "../../redux/slices/apiSlice";
-import { Article } from "../../shared/Article/Article";
+} from "redux/slices/apiSlice";
+import { Article } from "@shared/Article/Article";
 
 export const LessonPage = () => {
   const { state } = useLocation();
