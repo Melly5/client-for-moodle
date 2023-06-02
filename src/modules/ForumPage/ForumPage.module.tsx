@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 const AddForumDiscussion = lazy(
-  () => import("./components/AddForumDiscussion")
+  () => import("./components/AddForum/AddForumDiscussion")
 );
 
 import TimeParser from "../../shared/Time/Time";
