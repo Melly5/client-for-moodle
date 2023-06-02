@@ -11,6 +11,7 @@ import {
 } from "../../redux/slices/apiSlice";
 
 import TimeParser from "../../components/Time/Time";
+import { Article } from "../../components/Article/Article";
 
 export const ForumPage = () => {
   const { state } = useLocation();
@@ -30,11 +31,15 @@ export const ForumPage = () => {
 
   return (
     <div>
-      <div className="my-5 text-lg font-bold">{name}</div>
-      <Suspense fallback={<p>loading</p>}>
+      <Article>{name}</Article>
+      <Suspense
+        fallback={<p className="font-bold text-2xl mb-5">Загрузка формы...</p>}
+      >
         <AddForumDiscussion id={id} />
       </Suspense>
-      {isLoading && <div className="font-bold text-2xl">Loading...</div>}
+      {isLoading && (
+        <div className="font-bold text-2xl ">Загрузка обсуждений...</div>
+      )}
 
       {isSuccess && (
         <div className="rounded-lg">

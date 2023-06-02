@@ -5,6 +5,7 @@ import {
   PageContent,
   useGetWebpageContentQuery,
 } from "../../redux/slices/apiSlice";
+import { Article } from "../../components/Article/Article";
 
 export const WebpagePage = () => {
   const { state } = useLocation();
@@ -31,7 +32,7 @@ export const WebpagePage = () => {
     let pageContent = getPageContent(webpageContent, id);
     return (
       <>
-        <div>{pageContent.name}</div>
+        <Article>{pageContent.name}</Article>
         <div>{parse(pageContent.content)}</div>
       </>
     );

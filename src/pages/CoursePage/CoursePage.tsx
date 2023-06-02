@@ -16,6 +16,8 @@ const Webpage = lazy(
 );
 
 import { CourseInfo, useGetCourseInfoQuery } from "../../redux/slices/apiSlice";
+import CourseItemLoader from "../../components/Loader/Loader";
+import { Article } from "../../components/Article/Article";
 
 export const CoursePage = () => {
   const params = useParams();
@@ -39,9 +41,7 @@ export const CoursePage = () => {
     return (
       <div>
         <div className="m-5">
-          <label className="text-2xl font-semibold my-5">
-            {course.fullname}
-          </label>
+          <Article> {course.fullname}</Article>
           <div className="my-5">{parse(course.summary)}</div>
         </div>
         <div className="w-3/5">
@@ -52,9 +52,9 @@ export const CoursePage = () => {
                 {info.modules.map((module: any, id: number) => (
                   <div
                     key={id}
-                    className="flex content-center my-3 cursor-pointer"
+                    className="flex flex-col content-center my-3 cursor-pointer"
                   >
-                    <Suspense fallback={<p>loading</p>}>
+                    <Suspense fallback={<CourseItemLoader />}>
                       {module.modname === "folder" && <Folder {...module} />}
                       {module.modname === "forum" && <Forum {...module} />}
                       {module.modname === "assign" && (

@@ -6,6 +6,7 @@ import {
   LessonProps,
   useGetLessonPageContentQuery,
 } from "../../redux/slices/apiSlice";
+import { Article } from "../../components/Article/Article";
 
 export const LessonPage = () => {
   const { state } = useLocation();
@@ -53,7 +54,7 @@ export const LessonPage = () => {
   if (isSuccess)
     return (
       <div className="w-5/6">
-        <h4 className="m-5 text-xl font-bold">{name}</h4>
+        <Article>{name}</Article>
         {lessonPageItems.page && (
           <div>
             <div className="m-5 font-bold">{lessonPageItems.page.title}</div>

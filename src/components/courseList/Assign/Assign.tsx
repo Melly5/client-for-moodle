@@ -27,7 +27,7 @@ const Assign = ({ assign, courseid }: AssignProps) => {
 
   return (
     <div
-      className="p-4 text-white bg-blue-500 rounded-xl cursor-pointer"
+      className="w-3/4 p-4 text-white bg-blue-500 rounded-xl cursor-pointer"
       onClick={() =>
         navigate(`/assign/${assign.id}`, {
           state: { id: assign.instance, courseid },
