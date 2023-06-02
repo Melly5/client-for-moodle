@@ -25,7 +25,10 @@ const Webpage = lazy(
   () => import("./components/moduleItems/Webpage/Webpage.component")
 );
 
-import { CourseInfo, useGetCourseInfoQuery } from "../../redux/slices/apiSlice";
+import {
+  CourseInfo,
+  useGetCourseInfoQuery,
+} from "../../services/api/api.service";
 import CourseItemLoader from "./components/Loader/Loader.component";
 import { Article } from "../../shared/Article/Article";
 

@@ -6,7 +6,7 @@ import FileItem from "../../shared/File/File";
 import TimeParser from "../../shared/Time/Time";
 import { Article } from "../../shared/Article/Article";
 
-import { Service } from "../../utils/api/requests";
+import { Service } from "../../tempForAssignPage/utils/api/requests";
 import { Assignment, InitialState } from "./AssignPage.types";
 
 export const AssignPage = () => {
@@ -57,7 +57,6 @@ export const AssignPage = () => {
     getSubmissionStatus();
   }, [setAssignment, setSubmission, setSubmissionStatus]);
 
-  console.log(submission);
   return (
     <div className="w-3/5">
       {assignment && (

@@ -9,7 +9,6 @@ export const Service = {
     return api.get(`${allAssignmentsUrl}&courseids[0]=${courseid}`);
   },
   async getAllSubmissions(assignid: number) {
-    console.log(assignid);
     return api.get(`${allSubmissionsUrl}&assignmentids[0]=${assignid}`);
   },
   async getSubmissionStatus(assignid: number) {

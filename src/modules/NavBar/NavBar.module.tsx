@@ -19,7 +19,7 @@ export const NavBar = () => {
               <span className="sr-only">ТУСУР</span>
               <img
                 className="h-8 w-auto"
-                src="\src\assets\tusur-logo.svg"
+                src="\public\assets\tusur-logo.svg"
                 alt=""
               />
             </a>

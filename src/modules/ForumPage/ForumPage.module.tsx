@@ -4,10 +4,10 @@ import { lazy, Suspense } from "react";
 const AddForumDiscussion = lazy(
   () => import("./components/AddForum/AddForumDiscussion")
 );
-
+import { Article } from "../../shared/Article/Article";
 import TimeParser from "../../shared/Time/Time";
 
-import { useGetForumDiscussionsQuery } from "../../services/api";
+import { useGetForumDiscussionsQuery } from "../../services/api/api.service";
 
 export const ForumPage = () => {
   const { state } = useLocation();

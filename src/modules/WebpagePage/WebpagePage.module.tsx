@@ -5,7 +5,7 @@ import { Article } from "../../shared/Article/Article";
 import {
   PageContent,
   useGetWebpageContentQuery,
-} from "../../redux/slices/apiSlice";
+} from "../../services/api/api.service";
 
 export const WebpagePage = () => {
   const { state } = useLocation();

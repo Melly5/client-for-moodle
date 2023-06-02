@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import { authRoutes, publicRoutes } from "../utils/api/constants/routes";
-import { Courses } from "../modules/CoursesList/Courses.module";
-import { PageLayout } from "./PageLayout";
+
+import { Courses } from "../../modules/CoursesList/Courses.module";
+import { PageLayout } from "../PageLayout/PageLayout";
+import { authRoutes, publicRoutes } from "../../services/api/api.routes";
 
 export const AppRouter = () => {
   const authRouteComponents = authRoutes.map(({ path, Component }) => (

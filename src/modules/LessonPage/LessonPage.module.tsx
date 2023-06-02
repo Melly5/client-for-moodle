@@ -5,7 +5,7 @@ import {
   LessonPageAnswersI,
   LessonProps,
   useGetLessonPageContentQuery,
-} from "../../redux/slices/apiSlice";
+} from "../../services/api/api.service";
 import { Article } from "../../shared/Article/Article";
 
 export const LessonPage = () => {
