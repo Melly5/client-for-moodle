@@ -18,11 +18,11 @@ export interface AssignDate {
 
 export interface AssignProps {
   assign: AssignComponentI;
-  courseid: string;
+  courseid: number;
 }
 
 const Assign = ({ assign, courseid }: AssignProps) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div

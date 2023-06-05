@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 const ForumDiscussion = () => {
   const [discussion, setDiscussion] = useState<any[]>([]);
-  let params = useParams();
+  const params = useParams();
   const { state } = useLocation();
   const { name } = state;
 

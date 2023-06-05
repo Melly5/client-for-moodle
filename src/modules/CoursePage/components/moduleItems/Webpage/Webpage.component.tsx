@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 export interface WebpageProps {
   page: any;
-  courseid: string;
+  courseid: number;
 }
 
 const Webpage = ({ page, courseid }: WebpageProps) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className=" flex">

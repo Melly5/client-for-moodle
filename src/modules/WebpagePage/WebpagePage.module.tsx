@@ -23,7 +23,7 @@ export const WebpagePage = () => {
   };
 
   if (isSuccess) {
-    let pageContent = getPageContent(webpageContent, id);
+    const pageContent = getPageContent(webpageContent, id);
     return (
       <>
         {isLoading ? (

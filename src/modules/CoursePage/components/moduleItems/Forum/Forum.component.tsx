@@ -8,7 +8,7 @@ export interface ForumI {
 }
 
 const Forum = (forum: ForumI) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className=" flex">

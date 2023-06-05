@@ -13,7 +13,7 @@ export const ForumPage = () => {
   const { state } = useLocation();
   const { id, name } = state;
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     data: discussionItems,

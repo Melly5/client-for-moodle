@@ -8,17 +8,17 @@ export interface LessonI {
   instance: number;
   name: string;
   completion: number;
-  completiondata: {};
+  completiondata: [];
   dates: [];
   url: string;
 }
 
 const Lesson = (lesson: LessonI) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [startPage, setStartPage] = useState<number>(0);
 
   const fetchData = () => {
-    let apiStartPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_pages&moodlewsrestformat=json&lessonid=${lesson.instance}`;
+    const apiStartPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_pages&moodlewsrestformat=json&lessonid=${lesson.instance}`;
 
     const fetchStartPageData = async () => {
       const result = await axios(apiStartPage);

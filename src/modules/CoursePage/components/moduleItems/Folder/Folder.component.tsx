@@ -8,7 +8,7 @@ export interface FolderI {
 }
 
 const Folder = (folder: FolderI) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className=" flex">

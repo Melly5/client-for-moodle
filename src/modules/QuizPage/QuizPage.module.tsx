@@ -1,7 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import parse from "html-react-parser";
-import axios from "axios";
 
 import { Article } from "../../shared/Article/Article";
 import {
@@ -10,7 +7,7 @@ import {
 } from "../../services/api/api.service";
 
 export const QuizPage = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { id, name } = state;
 
