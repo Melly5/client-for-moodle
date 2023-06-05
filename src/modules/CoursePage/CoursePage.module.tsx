@@ -31,12 +31,13 @@ import {
 } from "../../services/api/api.service";
 import CourseItemLoader from "./components/Loader/Loader.component";
 import { Article } from "../../shared/Article/Article";
+import { Url } from "./components/moduleItems/Url/Url.component";
 
 export const CoursePage: FC = () => {
   const params = useParams();
   const { state } = useLocation();
   const { course } = state;
-  let id = params.id as string;
+  const id = params.id;
 
   const { data: courseItems, isLoading } = useGetCourseInfoQuery(id);
   console.log(courseItems);
@@ -64,10 +65,7 @@ export const CoursePage: FC = () => {
                         {module.modname === "folder" && <Folder {...module} />}
                         {module.modname === "forum" && <Forum {...module} />}
                         {module.modname === "assign" && (
-                          <Assign
-                            assign={module}
-                            courseid={params.id as string}
-                          />
+                          <Assign assign={module} courseid={params.id} />
                         )}
                         {module.modname === "quiz" && <Quiz {...module} />}
                         {module.modname === "lesson" && <Lesson {...module} />}
@@ -76,10 +74,10 @@ export const CoursePage: FC = () => {
                         )}
                         {module.modname === "label" && <Label {...module} />}
                         {module.modname === "page" && (
-                          <Webpage
-                            page={module}
-                            courseid={params.id as string}
-                          />
+                          <Webpage page={module} courseid={params.id} />
+                        )}
+                        {module.modname === "url" && (
+                          <Url url={module} courseid={params.id} />
                         )}
                       </Suspense>
                     </div>
@@ -87,6 +85,16 @@ export const CoursePage: FC = () => {
                 </div>
               </div>
             ))}
+          </div>{" "}
+          <div className="relative overflow-hidden  h-96 m-5">
+            <iframe
+              id="myIframe"
+              className="absolute overflow-hidden overscroll-auto bottom-14 left-0"
+              title="Inline Frame Example"
+              width="900"
+              height="600"
+              src="https://dev.online.tusur.ru/moodle/mod/quiz/attempt.php?attempt=3&cmid=12"
+            ></iframe>
           </div>
         </div>
       )}

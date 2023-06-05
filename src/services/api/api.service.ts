@@ -15,6 +15,7 @@ const webpageContentUrl = `${API}mod_page_get_pages_by_courses`;
 const quizAccessInfoUrl = `${API}mod_quiz_get_quiz_access_information`;
 const quizAttemptDataUrl = `${API}mod_quiz_get_attempt_data`;
 const quizStartAttemptUrl = `${API}mod_quiz_start_attempt`;
+const urlInfoUrl = `${API}mod_url_get_urls_by_courses`;
 
 export const baseApi = createApi({
   reducerPath: "api",
@@ -23,10 +24,10 @@ export const baseApi = createApi({
     getCourses: builder.query<Course[], void>({
       query: () => allCoursesUrl,
     }),
-    getCourseInfo: builder.query<CourseInfo[], string>({
+    getCourseInfo: builder.query<CourseInfo[], number>({
       query: (id) => ({ url: `${courseContentUrl}&courseid=${id}` }),
     }),
-    getAllAssignments: builder.query<Assignment[], string>({
+    getAllAssignments: builder.query<Assignment[], number>({
       query: (id) => ({ url: `${allAssignmentsUrl}&courseids[0]=${id}` }),
       transformResponse: (response: any) => response.courses[0].assignments,
     }),
@@ -51,7 +52,7 @@ export const baseApi = createApi({
         };
       },
     }),
-    getWebpageContent: builder.query<PageContent, string>({
+    getWebpageContent: builder.query<PageContent, number>({
       query: (courseid) => {
         return { url: `${webpageContentUrl}&courseids[0]=${courseid}` };
       },
@@ -71,6 +72,10 @@ export const baseApi = createApi({
         };
       },
     }),
+    getUrlInfo: builder.query<any, number>({
+      query: (id) => ({ url: `${urlInfoUrl}&courseids[0]=${id}` }),
+      transformResponse: (response: any) => response.urls,
+    }),
   }),
 });
 
@@ -86,6 +91,7 @@ export const {
   useGetQuizAccessInformationQuery,
   useGetQuizAttemptDataQuery,
   useGetQuizStartAttemptQuery,
+  useGetUrlInfoQuery,
 } = baseApi;
 
 export interface QuizAttemptProps {

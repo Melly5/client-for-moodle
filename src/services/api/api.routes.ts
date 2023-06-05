@@ -9,6 +9,7 @@ import ForumDiscussion from "../../modules/CoursePage/components/moduleItems/Dis
 import { WebpagePage } from "../../modules/WebpagePage/WebpagePage.module";
 import { Login } from "../../modules/Login.module";
 import { QuizAttemptPage } from "../../modules/QuizPage/QuizAttemptPage.module";
+import { UrlPage } from "../../modules/UrlPage/UrlPage.module";
 
 import {
   LOGIN_ROUTE,
@@ -22,6 +23,7 @@ import {
   DISCUSSION_ROUTE,
   PAGE_ROUTE,
   QUIZ_ATTEMPT_ROUTE,
+  URL_ROUTE,
 } from "./api.constants";
 
 export const authRoutes = [
@@ -64,6 +66,10 @@ export const authRoutes = [
   {
     path: QUIZ_ATTEMPT_ROUTE,
     Component: QuizAttemptPage,
+  },
+  {
+    path: URL_ROUTE,
+    Component: UrlPage,
   },
 ];
 
