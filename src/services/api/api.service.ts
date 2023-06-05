@@ -16,6 +16,7 @@ const quizAccessInfoUrl = `${API}mod_quiz_get_quiz_access_information`;
 const quizAttemptDataUrl = `${API}mod_quiz_get_attempt_data`;
 const quizStartAttemptUrl = `${API}mod_quiz_start_attempt`;
 const urlInfoUrl = `${API}mod_url_get_urls_by_courses`;
+const surveyContentUrl = `${API}mod_survey_get_questions`;
 
 export const baseApi = createApi({
   reducerPath: "api",
@@ -76,6 +77,10 @@ export const baseApi = createApi({
       query: (id) => ({ url: `${urlInfoUrl}&courseids[0]=${id}` }),
       transformResponse: (response: any) => response.urls,
     }),
+    getSurveyContent: builder.query<any, number>({
+      query: (id) => ({ url: `${surveyContentUrl}&surveyid=${id}` }),
+      transformResponse: (response: any) => response.questions,
+    }),
   }),
 });
 
@@ -92,6 +97,7 @@ export const {
   useGetQuizAttemptDataQuery,
   useGetQuizStartAttemptQuery,
   useGetUrlInfoQuery,
+  useGetSurveyContentQuery,
 } = baseApi;
 
 export interface QuizAttemptProps {

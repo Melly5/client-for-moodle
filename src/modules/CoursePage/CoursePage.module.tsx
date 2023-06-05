@@ -32,6 +32,7 @@ import {
 import CourseItemLoader from "./components/Loader/Loader.component";
 import { Article } from "../../shared/Article/Article";
 import { Url } from "./components/moduleItems/Url/Url.component";
+import { Survey } from "./components/moduleItems/Survey/Survey.component";
 
 export const CoursePage: FC = () => {
   const params = useParams();
@@ -79,6 +80,7 @@ export const CoursePage: FC = () => {
                         {module.modname === "url" && (
                           <Url url={module} courseid={params.id} />
                         )}
+                        {module.modname === "survey" && <Survey {...module} />}
                       </Suspense>
                     </div>
                   ))}

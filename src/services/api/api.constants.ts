@@ -11,3 +11,4 @@ export const DISCUSSION_ROUTE = "/discussion/:id";
 export const PAGE_ROUTE = "/page/:id";
 export const QUIZ_ATTEMPT_ROUTE = "/quizpage/:id";
 export const URL_ROUTE = "/url/:id";
+export const SURVEY_ROUTE = "/survey/:id";

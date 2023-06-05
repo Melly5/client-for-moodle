@@ -24,7 +24,9 @@ import {
   PAGE_ROUTE,
   QUIZ_ATTEMPT_ROUTE,
   URL_ROUTE,
+  SURVEY_ROUTE,
 } from "./api.constants";
+import { SurveyPage } from "../../modules/SurveyPage/SurveyPage";
 
 export const authRoutes = [
   {
@@ -70,6 +72,10 @@ export const authRoutes = [
   {
     path: URL_ROUTE,
     Component: UrlPage,
+  },
+  {
+    path: SURVEY_ROUTE,
+    Component: SurveyPage,
   },
 ];
 
