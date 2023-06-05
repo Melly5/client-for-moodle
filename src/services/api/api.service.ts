@@ -30,20 +30,19 @@ export const baseApi = createApi({
     }),
     getAllAssignments: builder.query<Assignment[], number>({
       query: (id) => ({ url: `${allAssignmentsUrl}&courseids[0]=${id}` }),
-      transformResponse: (response: any) => response.courses[0].assignments,
+      transformResponse: (response) => response.courses[0].assignments,
     }),
     getAllSubmissions: builder.query<Submission, number>({
       query: (id) => ({ url: `${allSubmissionsUrl}&assignmentids[0]=${id}` }),
-      transformResponse: (response: any) =>
-        response.assignments[0].submissions[0],
+      transformResponse: (response) => response.assignments[0].submissions[0],
     }),
     getSubmissionStatus: builder.query<SubmissionStatus, number>({
       query: (id) => ({ url: `${submissionStatusUrl}&assignid=${id}` }),
-      transformResponse: (response: any) => response.feedback,
+      transformResponse: (response) => response.feedback,
     }),
     getForumDiscussions: builder.query<ForumDiscussion[], number>({
       query: (id) => ({ url: `${forumDiscussionsUrl}&forumid=${id}` }),
-      transformResponse: (response: Discussions) => response.discussions,
+      transformResponse: (response) => response.discussions,
     }),
     getLessonPageContent: builder.query<LessonI, LessonProps>({
       query: (args) => {
@@ -59,13 +58,13 @@ export const baseApi = createApi({
       },
       transformResponse: (response: Webpage) => response.pages as PageContent,
     }),
-    getQuizAccessInformation: builder.query<any, number>({
+    getQuizAccessInformation: builder.query<QuizAccessInformation, number>({
       query: (id) => ({ url: `${quizAccessInfoUrl}&quizid=${id}` }),
     }),
-    getQuizStartAttempt: builder.query<any, number>({
+    getQuizStartAttempt: builder.query<QuizStartAttempt, number>({
       query: (id) => ({ url: `${quizStartAttemptUrl}&quizid=${id}` }),
     }),
-    getQuizAttemptData: builder.query<any, QuizAttemptProps>({
+    getQuizAttemptData: builder.query<QuizAttemptData, QuizAttemptProps>({
       query: (args) => {
         const { attemptid, page } = args;
         return {
@@ -73,13 +72,13 @@ export const baseApi = createApi({
         };
       },
     }),
-    getUrlInfo: builder.query<any, number>({
+    getUrlInfo: builder.query<UrlContent[], number>({
       query: (id) => ({ url: `${urlInfoUrl}&courseids[0]=${id}` }),
-      transformResponse: (response: any) => response.urls,
+      transformResponse: (response) => response.urls,
     }),
-    getSurveyContent: builder.query<any, number>({
+    getSurveyContent: builder.query<SurveyContent[], number>({
       query: (id) => ({ url: `${surveyContentUrl}&surveyid=${id}` }),
-      transformResponse: (response: any) => response.questions,
+      transformResponse: (response) => response.questions,
     }),
   }),
 });
@@ -99,11 +98,6 @@ export const {
   useGetUrlInfoQuery,
   useGetSurveyContentQuery,
 } = baseApi;
-
-export interface QuizAttemptProps {
-  attemptid: number;
-  page: number;
-}
 
 export interface Course {
   id: number;
@@ -233,4 +227,39 @@ export interface PageContent {
   name: string;
   timemodified: number;
   content: string;
+}
+
+export interface QuizAttemptProps {
+  attemptid: number;
+  page: number;
+}
+
+export interface QuizAccessInformation {
+  accessrules: string[];
+}
+export interface QuizStartAttempt {
+  attempt: { id: number; currentpage: number };
+}
+export interface QuizAttemptData {
+  attempt: { id: number; currentpage: number };
+  nextpage: number;
+  questions: {
+    type: string;
+    page: number;
+    html: string;
+    status: string;
+    maxmark: number;
+  };
+}
+
+export interface UrlContent {
+  id: number;
+  name: string;
+  externalurl: string;
+}
+
+export interface SurveyContent {
+  id: number;
+  text: string;
+  type: number;
 }

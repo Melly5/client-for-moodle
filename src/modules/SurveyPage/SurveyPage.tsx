@@ -1,18 +1,10 @@
-import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useGetSurveyContentQuery } from "../../services/api/api.service";
-import { Article } from "../../shared/Article/Article";
-
-export interface Survey {
-  id: number;
-  text: string;
-  type: number;
-}
+import {
+  SurveyContent,
+  useGetSurveyContentQuery,
+} from "../../services/api/api.service";
 
 export const SurveyPage = () => {
-  const [questions, setQuestions] = useState<any>();
-  const [variants, setVariants] = useState<any>();
-
   const { state } = useLocation();
   const { id } = state;
 
@@ -21,7 +13,6 @@ export const SurveyPage = () => {
   if (isLoading) return <div>Loading</div>;
 
   if (isSuccess) {
-    console.log(questions, variants);
     return (
       <>
         <button
@@ -31,7 +22,7 @@ export const SurveyPage = () => {
           click
         </button>
 
-        {survey.map((row: Survey[], id: number) => (
+        {survey.map((row: SurveyContent, id: number) => (
           <div
             key={id}
             className="flex flex-col content-center my-2 cursor-pointer"

@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { useGetQuizAttemptDataQuery } from "../../services/api/api.service";
 
@@ -7,11 +7,7 @@ export const QuizAttemptPage = () => {
   console.log(params);
   const id = params.id as string;
 
-  const {
-    data: quizAccessInfo,
-    isLoading,
-    isSuccess,
-  } = useGetQuizAttemptDataQuery(id);
+  const { data: quizAccessInfo } = useGetQuizAttemptDataQuery(id);
 
   return <div>hey</div>;
 };

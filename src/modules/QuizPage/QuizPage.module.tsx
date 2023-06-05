@@ -11,19 +11,15 @@ export const QuizPage = () => {
   const { state } = useLocation();
   const { id, name } = state;
 
-  const {
-    data: quizAccessInfo,
-    isLoading,
-    isSuccess,
-  } = useGetQuizAccessInformationQuery(id);
+  const { data: quizAccessInfo } = useGetQuizAccessInformationQuery(id);
 
-  const { data: quizAttemptInfo } = useGetQuizStartAttemptQuery(id);
-  console.log(quizAttemptInfo);
+  //const { data: quizAttemptInfo } = useGetQuizStartAttemptQuery(id);
+  /* console.log(quizAttemptInfo);
   const startAttemptOnClick = () => {
     navigate(`/quizpage/${quizAttemptInfo.attempt.currentpage}`, {
       state: { id: quizAttemptInfo.id },
     });
-  };
+  };*/
 
   return (
     <div>
@@ -33,10 +29,7 @@ export const QuizPage = () => {
           <div key={id}>{question}</div>
         ))}
       </div>
-      <button
-        className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
-        onClick={startAttemptOnClick}
-      >
+      <button className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500">
         Начать попытку
       </button>
     </div>
