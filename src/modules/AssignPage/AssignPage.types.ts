@@ -1,3 +1,5 @@
+import { File } from "../../shared/types/types";
+
 export interface Assignment {
   id: number;
   cmid: number;
@@ -9,16 +11,6 @@ export interface Assignment {
   intro: string;
   duedate: number;
   allowsubmissionsfromdate: number;
-}
-
-export interface File {
-  filename: string;
-  filepath: string;
-  filesize: number;
-  fileurl: string;
-  isexternalfile: boolean;
-  mimetype: string;
-  timemodified: number;
 }
 
 export const InitialState: Assignment = {
@@ -33,3 +25,56 @@ export const InitialState: Assignment = {
   duedate: 0,
   allowsubmissionsfromdate: 0,
 };
+
+export interface Submission {
+  id: number;
+  userid: number;
+  gradingstatus: string;
+  groupid: number;
+  attemptnumber: number;
+  timecreated: number;
+  timemodified: number;
+  status: string;
+  plugins: [];
+}
+
+export interface SubmissionStatus {
+  grade: StatusGrade;
+  gradedate: number;
+  gradefordisplay: string;
+  plugins: [
+    {
+      name: string;
+      type: string;
+      fileareas: [];
+      editorfields: [
+        {
+          description: string;
+          text: string;
+        }
+      ];
+    }
+  ];
+}
+
+export interface StatusGrade {
+  id: number;
+  userid: number;
+  assignment: number;
+  attemptnumber: number;
+  grade: string;
+  grader: number;
+  timecreated: number;
+  timemodified: number;
+}
+
+export interface SubmissionPlugins {
+  type: string;
+  name: string;
+  fileareas: [
+    {
+      area: string;
+      files: File[];
+    }
+  ];
+}

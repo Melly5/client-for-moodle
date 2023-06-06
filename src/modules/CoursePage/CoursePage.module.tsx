@@ -25,14 +25,12 @@ const Webpage = lazy(
   () => import("./components/moduleItems/Webpage/Webpage.component")
 );
 
-import {
-  CourseInfo,
-  useGetCourseInfoQuery,
-} from "../../services/api/api.service";
+import { useGetCourseInfoQuery } from "../../services/api/api.service";
 import CourseItemLoader from "./components/Loader/Loader.component";
-import { Article } from "../../shared/Article/Article";
+import { Article } from "../../shared/components/Article/Article";
 import { Url } from "./components/moduleItems/Url/Url.component";
 import { Survey } from "./components/moduleItems/Survey/Survey.component";
+import { CourseInfo, CourseModule } from "./CoursePage.types";
 
 export const CoursePage: FC = () => {
   const params = useParams();
@@ -57,7 +55,7 @@ export const CoursePage: FC = () => {
               <div key={id} className="bg-gray-100 m-5 py-5 px-20 rounded-3xl">
                 <div className="my-5 text-xl font-bold">{info.name}</div>
                 <div className="flex flex-col m-5">
-                  {info.modules.map((module: any, id: number) => (
+                  {info.modules.map((module: CourseModule, id: number) => (
                     <div
                       key={id}
                       className="flex flex-col content-center my-3 cursor-pointer"
@@ -87,16 +85,6 @@ export const CoursePage: FC = () => {
                 </div>
               </div>
             ))}
-          </div>{" "}
-          <div className="relative overflow-hidden  h-96 m-5">
-            <iframe
-              id="myIframe"
-              className="absolute overflow-hidden overscroll-auto bottom-14 left-0"
-              title="Inline Frame Example"
-              width="900"
-              height="600"
-              src="https://dev.online.tusur.ru/moodle/mod/quiz/attempt.php?attempt=3&cmid=12"
-            ></iframe>
           </div>
         </div>
       )}

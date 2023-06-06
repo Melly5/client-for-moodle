@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
-import { UrlContent, useGetUrlInfoQuery } from "../../services/api/api.service";
-import { Article } from "../../shared/Article/Article";
+import { useGetUrlInfoQuery } from "../../services/api/api.service";
+import { Article } from "../../shared/components/Article/Article";
+import { UrlContent } from "./UrlPage.types";
 
 export const UrlPage = () => {
   const { state } = useLocation();

@@ -1,13 +1,10 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import { Article } from "../../shared/Article/Article";
-import {
-  useGetQuizAccessInformationQuery,
-  useGetQuizStartAttemptQuery,
-} from "../../services/api/api.service";
+import { Article } from "../../shared/components/Article/Article";
+import { useGetQuizAccessInformationQuery } from "../../services/api/api.service";
 
 export const QuizPage = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { state } = useLocation();
   const { id, name } = state;
 
@@ -25,8 +22,8 @@ export const QuizPage = () => {
     <div>
       <Article>{name}</Article>
       <div>
-        {quizAccessInfo?.accessrules.map((question: any, id: number) => (
-          <div key={id}>{question}</div>
+        {quizAccessInfo?.accessrules.map((rule: string, id: number) => (
+          <div key={id}>{rule}</div>
         ))}
       </div>
       <button className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500">

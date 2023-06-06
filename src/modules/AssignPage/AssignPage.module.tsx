@@ -2,18 +2,25 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import parse from "html-react-parser";
 
-import FileItem from "../../shared/File/File";
-import TimeParser from "../../shared/Time/Time";
-import { Article } from "../../shared/Article/Article";
+import FileItem from "../../shared/components/File/File";
+import TimeParser from "../../shared/components/Time/Time";
+import { Article } from "../../shared/components/Article/Article";
 
 import { Service } from "../../tempForAssignPage/utils/api/requests";
-import { Assignment, InitialState } from "./AssignPage.types";
+import {
+  Assignment,
+  Submission,
+  SubmissionStatus,
+  SubmissionPlugins,
+  InitialState,
+} from "./AssignPage.types";
+import { File } from "../../services/api/api.service";
 
 export const AssignPage = () => {
   const [assignment, setAssignment] = useState<Assignment>(InitialState);
-  const [submission, setSubmission] = useState<any>();
-  const [submissionStatus, setSubmissionStatus] = useState<any>();
-
+  const [submission, setSubmission] = useState<Submission>();
+  const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>();
+  console.log(submissionStatus);
   const { state } = useLocation();
   const { courseid, id } = state;
 
@@ -55,7 +62,7 @@ export const AssignPage = () => {
     getAssignment();
     getSubmissions();
     getSubmissionStatus();
-  }, [setAssignment, setSubmission, setSubmissionStatus]);
+  }, []);
 
   return (
     <div className="w-3/5">
@@ -110,8 +117,8 @@ export const AssignPage = () => {
           </div>
           <div>
             {submission.plugins[0].fileareas[0].files.length != 0 &&
-              submission.plugins.map((item: any) => (
-                <div>
+              submission.plugins.map((item: SubmissionPlugins, id: number) => (
+                <div key={id}>
                   <span> Ответ в виде файла:</span>
                   {item.type === "file" &&
                     item.fileareas[0].files.map((content: File, id: number) => (

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-import FileItem from "../../shared/File/File";
+import FileItem from "../../shared/components/File/File";
 
 export const ResourcePage = () => {
   const { state } = useLocation();

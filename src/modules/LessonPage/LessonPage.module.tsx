@@ -1,17 +1,17 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import parse from "html-react-parser";
 
+import { Article } from "../../shared/components/Article/Article";
+import { LessonPageAnswers } from "./LessonPage.types";
 import {
-  LessonPageAnswersI,
   LessonProps,
   useGetLessonPageContentQuery,
 } from "../../services/api/api.service";
-import { Article } from "../../shared/Article/Article";
 
 export const LessonPage = () => {
   const { state } = useLocation();
   const { id, name, instance, startPage } = state;
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClickNextPage = (jump: number) => {
     jump === -1 &&
@@ -34,14 +34,14 @@ export const LessonPage = () => {
       });
   };
 
-  let props: LessonProps = {
+  const props: LessonProps = {
     lessonid: instance,
     startpageid: startPage,
   };
 
   const { data: lessonPageItems, isLoading } =
     useGetLessonPageContentQuery(props);
-
+  console.log(lessonPageItems);
   return (
     <>
       {isLoading ? (
@@ -61,7 +61,7 @@ export const LessonPage = () => {
             lessonPageItems.answers && (
               <div className="flex">
                 {lessonPageItems.answers.map(
-                  (answer: LessonPageAnswersI, id: number) => (
+                  (answer: LessonPageAnswers, id: number) => (
                     <button
                       key={id}
                       className="mx-4 px-4 py-2 rounded-xl bg-blue-300"
@@ -76,23 +76,14 @@ export const LessonPage = () => {
           {lessonPageItems?.page.typestring == "Множественный выбор" &&
             lessonPageItems.answers && (
               <div className="flex flex-col">
-                {lessonPageItems.answers.map((answer: any, id: number) => (
-                  <label className="flex mx-16">
-                    <input className="mx-3" type="radio" key={id} />
-                    {parse(answer.answer)}
-                  </label>
-                ))}
-              </div>
-            )}
-          {lessonPageItems?.page.typestring == "На соответствие" &&
-            lessonPageItems.answers && (
-              <div className="flex flex-col">
-                {lessonPageItems.answers.map((answer: any, id: number) => (
-                  <label className="flex mx-16">
-                    <input className="mx-3" type="radio" key={id} />
-                    {parse(answer.answer)}
-                  </label>
-                ))}
+                {lessonPageItems.answers.map(
+                  (answer: LessonPageAnswers, id: number) => (
+                    <label className="flex mx-16">
+                      <input className="mx-3" type="radio" key={id} />
+                      {parse(answer.answer)}
+                    </label>
+                  )
+                )}
               </div>
             )}
         </div>

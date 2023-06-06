@@ -10,6 +10,7 @@ import { WebpagePage } from "../../modules/WebpagePage/WebpagePage.module";
 import { Login } from "../../modules/Login.module";
 import { QuizAttemptPage } from "../../modules/QuizPage/QuizAttemptPage.module";
 import { UrlPage } from "../../modules/UrlPage/UrlPage.module";
+import { SurveyPage } from "../../modules/SurveyPage/SurveyPage.module";
 
 import {
   LOGIN_ROUTE,
@@ -26,7 +27,6 @@ import {
   URL_ROUTE,
   SURVEY_ROUTE,
 } from "./api.constants";
-import { SurveyPage } from "../../modules/SurveyPage/SurveyPage";
 
 export const authRoutes = [
   {

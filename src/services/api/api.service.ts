@@ -1,5 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import {
+  QuizAccessInfo,
+  QuizAttemptData,
+  QuizStartAttempt,
+} from "../../modules/QuizPage/QuizPage.types";
+import { Course, CourseInfo } from "../../modules/CoursePage/CoursePage.types";
+import { UrlContent } from "../../modules/UrlPage/UrlPage.types";
+import { SurveyContent } from "../../modules/SurveyPage/SurveyPage.types";
+import { ForumDiscussion } from "../../modules/ForumPage/ForumPage.types";
+
 const token = "2b8e54a638f0422b6859f223fa0a086e";
 const API = `/server.php?wstoken=${token}&moodlewsrestformat=json&wsfunction=`;
 const API_URL = `https://dev.online.tusur.ru/moodle/webservice/rest`;
@@ -56,9 +66,9 @@ export const baseApi = createApi({
       query: (courseid) => {
         return { url: `${webpageContentUrl}&courseids[0]=${courseid}` };
       },
-      transformResponse: (response: Webpage) => response.pages as PageContent,
+      transformResponse: (response) => response.pages as PageContent,
     }),
-    getQuizAccessInformation: builder.query<QuizAccessInformation, number>({
+    getQuizAccessInformation: builder.query<QuizAccessInfo, number>({
       query: (id) => ({ url: `${quizAccessInfoUrl}&quizid=${id}` }),
     }),
     getQuizStartAttempt: builder.query<QuizStartAttempt, number>({
@@ -99,134 +109,9 @@ export const {
   useGetSurveyContentQuery,
 } = baseApi;
 
-export interface Course {
-  id: number;
-  fullname: string;
-}
-
-export interface CourseInfo {
-  id: number;
-  name: string;
-  modules: [];
-}
-
-export interface Assignment {
-  id: number;
-  cmid: number;
-  course: number;
-  name: string;
-  configs: [];
-  introattachments: [];
-  activity: string;
-  intro: string;
-  duedate: number;
-  allowsubmissionsfromdate: number;
-}
-
-export interface File {
-  filename: string;
-  filepath: string;
-  filesize: number;
-  fileurl: string;
-  isexternalfile: boolean;
-  mimetype: string;
-  timemodified: number;
-}
-
-export interface Submission {
-  gradingstatus: string;
-  plugins: Plugin[];
-}
-export interface Plugin {
-  type: string;
-  fileareas: [
-    {
-      files: File[];
-    }
-  ];
-}
-export interface SubmissionStatus {
-  gradefordisplay: string;
-  gradeddate: number;
-  plugins: [
-    {
-      editorfields: [
-        {
-          description: string;
-          text: string;
-        }
-      ];
-    }
-  ];
-}
-
 export interface LessonProps {
   lessonid: number;
   startpageid: number;
-}
-export interface Discussions {
-  discussions: [];
-}
-export interface ForumDiscussion {
-  id: number;
-  name: string;
-  userfullname: string;
-  created: number;
-  usermodifiedfullname: string;
-  timemodified: number;
-  numreplies: number;
-}
-
-export interface LessonPageI {
-  id: number;
-  lessonid: number;
-  prevpageid: number;
-  nextpageid: number;
-  qtype: number;
-  qoption: number;
-  timecreated: number;
-  timemodified: number;
-  title: string;
-  contents: string;
-  type: number;
-  typeid: number;
-  typestring: string;
-}
-export interface LessonPageAnswersI {
-  id: number;
-  answerfiles: [];
-  responsefiles: [];
-  jumpto: number;
-  grade: number;
-  score: number;
-  flags: number;
-  timecreated: number;
-  timemodified: number;
-  answer: string;
-  answerformat: number;
-  response: string;
-  responseformat: number;
-}
-
-export interface LessonI {
-  page: LessonPageI;
-  answers: LessonPageAnswersI[];
-}
-
-export interface Webpage {
-  pages: PageContent;
-}
-
-export interface webpageProps {
-  courseid: string;
-  lessonid: number;
-}
-
-export interface PageContent {
-  id: number;
-  name: string;
-  timemodified: number;
-  content: string;
 }
 
 export interface QuizAttemptProps {
@@ -234,32 +119,7 @@ export interface QuizAttemptProps {
   page: number;
 }
 
-export interface QuizAccessInformation {
-  accessrules: string[];
-}
-export interface QuizStartAttempt {
-  attempt: { id: number; currentpage: number };
-}
-export interface QuizAttemptData {
-  attempt: { id: number; currentpage: number };
-  nextpage: number;
-  questions: {
-    type: string;
-    page: number;
-    html: string;
-    status: string;
-    maxmark: number;
-  };
-}
-
-export interface UrlContent {
-  id: number;
-  name: string;
-  externalurl: string;
-}
-
-export interface SurveyContent {
-  id: number;
-  text: string;
-  type: number;
+export interface webpageProps {
+  courseid: string;
+  lessonid: number;
 }

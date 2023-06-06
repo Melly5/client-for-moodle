@@ -1,12 +1,9 @@
 import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
 
-import { Article } from "../../shared/Article/Article";
-import {
-  PageContent,
-  useGetWebpageContentQuery,
-} from "../../services/api/api.service";
-
+import { Article } from "../../shared/components/Article/Article";
+import { WebpageContent } from "./Webpage.types";
+import { useGetWebpageContentQuery } from "../../services/api/api.service";
 export const WebpagePage = () => {
   const { state } = useLocation();
   const { id, courseid } = state;
@@ -17,8 +14,9 @@ export const WebpagePage = () => {
     isSuccess,
   } = useGetWebpageContentQuery(courseid);
 
-  const getPageContent = (data: any, id: number) => {
-    const temp = data.filter((item: PageContent) => item.id === id);
+  const getPageContent = (data: WebpageContent[], id: number) => {
+    console.log(data);
+    const temp = data.filter((item: WebpageContent) => item.id === id);
     return temp[0];
   };
 

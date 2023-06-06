@@ -1,25 +1,9 @@
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
-import TimeParser from "../../../../../shared/Time/Time";
-
-export interface AssignComponentI {
-  id: number;
-  name: string;
-  dates: [];
-  contextid: number;
-  instance: number;
-}
-
-export interface AssignDate {
-  label: string;
-  timestamp: number;
-}
-
-export interface AssignProps {
-  assign: AssignComponentI;
-  courseid: number;
-}
+import TimeParser from "../../../../../shared/components/Time/Time";
+import { AssignProps } from "./Assign.types";
+import { Date } from "../../../../../shared/types/types";
 
 const Assign = ({ assign, courseid }: AssignProps) => {
   const navigate = useNavigate();
@@ -39,7 +23,7 @@ const Assign = ({ assign, courseid }: AssignProps) => {
         {assign.name}
       </div>
       <div className="flex flex-col">
-        {assign.dates.map((date: any, id: number) => (
+        {assign.dates.map((date: Date, id: number) => (
           <div key={id}>
             {date.label}
             <TimeParser timestamp={date.timestamp} type={"minutes"} />
