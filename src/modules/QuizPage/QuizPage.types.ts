@@ -11,8 +11,24 @@ export interface QuizAccessInfo {
 }
 
 export interface QuizStartAttempt {
-  attempt: { id: number; currentpage: number };
+  id: number;
+  quiz: number;
+  userid: number;
+  attempt: number;
+  uniqueid: number;
+  layout: stringnumber;
+  currentpage: number;
+  preview: number;
+  state: stringnumber;
+  timestart: number;
+  timefinish: number;
+  timemodified: number;
+  timemodifiedoffline: number;
+  timecheckstate: booleannumber;
+  sumgrades: booleannumber;
+  gradednotificationsenttime: boolean;
 }
+
 export interface QuizAttemptData {
   attempt: { id: number; currentpage: number };
   nextpage: number;

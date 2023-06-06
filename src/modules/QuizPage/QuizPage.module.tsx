@@ -1,22 +1,28 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { Article } from "../../shared/components/Article/Article";
-import { useGetQuizAccessInformationQuery } from "./QuizPage.api";
+import { QuizStartAttempt } from "./QuizPage.types";
+import {
+  useGetQuizAccessInformationQuery,
+  useLazyGetQuizStartAttemptQuery,
+} from "./QuizPage.api";
 
 export const QuizPage = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { id, name } = state;
 
   const { data: quizAccessInfo } = useGetQuizAccessInformationQuery(id);
 
-  //const { data: quizAttemptInfo } = useGetQuizStartAttemptQuery(id);
-  /* console.log(quizAttemptInfo);
-  const startAttemptOnClick = () => {
-    navigate(`/quizpage/${quizAttemptInfo.attempt.currentpage}`, {
-      state: { id: quizAttemptInfo.id },
+  const [triggerStartAttempt, { data: quizStartAttemptInfo }] =
+    useLazyGetQuizStartAttemptQuery(id);
+
+  const startAttemptOnClick = (quizStartAttemptInfo: QuizStartAttempt) => {
+    triggerStartAttempt();
+    navigate(`/quizpage/${quizStartAttemptInfo.attempt.currentpage}`, {
+      state: { id: quizStartAttemptInfo.id },
     });
-  };*/
+  };
 
   return (
     <div>
@@ -26,7 +32,10 @@ export const QuizPage = () => {
           <div key={id}>{rule}</div>
         ))}
       </div>
-      <button className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500">
+      <button
+        className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
+        onClick={() => startAttemptOnClick(quizStartAttemptInfo)}
+      >
         Начать попытку
       </button>
     </div>

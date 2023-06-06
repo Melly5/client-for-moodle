@@ -21,18 +21,22 @@ const productApi = baseApi.injectEndpoints({
     }),
     getLessonStartPageContent: build.query<any, number>({
       query: (id) => {
+        console.log(id);
         return {
           url: `${apiUrls.lessonStartPageContentUrl}&lessonid=${id}`,
           method: "GET",
         };
       },
-      transformResponse: (response) => response.pages[0].page.id,
+      transformResponse: (response) => {
+        console.log(response);
+        response.pages[0].page.id;
+      },
     }),
   }),
 });
 
 export const {
   useGetLessonPageContentQuery,
-  useGetLessonStartPageContentQuery,
+  useLazyGetLessonStartPageContentQuery,
   endpoints: { getLessonPageContent, getLessonStartPageContent },
 } = productApi;

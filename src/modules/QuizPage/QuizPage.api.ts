@@ -45,7 +45,7 @@ const productApi = baseApi.injectEndpoints({
 export const {
   useGetQuizAccessInformationQuery,
   useGetQuizAttemptDataQuery,
-  useGetQuizStartAttemptQuery,
+  useLazyGetQuizStartAttemptQuery,
   endpoints: {
     getQuizAccessInformation,
     getQuizStartAttempt,
