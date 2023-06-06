@@ -7,7 +7,7 @@ import { FolderContent } from "./FolderPage.types";
 export const FolderPage = () => {
   const { state } = useLocation();
   const { name, content } = state;
-  console.log(content);
+
   return (
     <Suspense fallback={<div>Loading</div>}>
       <div className="w-2/6 m-5 p-5 rounded-lg bg-gray-50">

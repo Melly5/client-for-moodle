@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
 
 import { Article } from "../../shared/components/Article/Article";
-import { WebpageContent } from "./Webpage.types";
+import { WebpageContent } from "./WebpagePage.types";
 import { useGetWebpageContentQuery } from "../../services/api/api.service";
 export const WebpagePage = () => {
   const { state } = useLocation();
