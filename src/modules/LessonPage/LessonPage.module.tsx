@@ -3,10 +3,7 @@ import parse from "html-react-parser";
 
 import { Article } from "../../shared/components/Article/Article";
 import { LessonPageAnswers } from "./LessonPage.types";
-import {
-  LessonProps,
-  useGetLessonPageContentQuery,
-} from "../../services/api/api.service";
+import { LessonProps, useGetLessonPageContentQuery } from "./LessonPage.api";
 
 export const LessonPage = () => {
   const { state } = useLocation();

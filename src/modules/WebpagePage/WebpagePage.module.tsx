@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 
 import { Article } from "../../shared/components/Article/Article";
 import { WebpageContent } from "./WebpagePage.types";
-import { useGetWebpageContentQuery } from "../../services/api/api.service";
+import { useGetWebpageContentQuery } from "./WebpagePage.api";
 export const WebpagePage = () => {
   const { state } = useLocation();
   const { id, courseid } = state;

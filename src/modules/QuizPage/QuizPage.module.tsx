@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 
 import { Article } from "../../shared/components/Article/Article";
-import { useGetQuizAccessInformationQuery } from "../../services/api/api.service";
+import { useGetQuizAccessInformationQuery } from "./QuizPage.api";
 
 export const QuizPage = () => {
   //const navigate = useNavigate();

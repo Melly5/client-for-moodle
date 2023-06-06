@@ -25,12 +25,12 @@ const Webpage = lazy(
   () => import("./components/moduleItems/Webpage/Webpage.component")
 );
 
-import { useGetCourseInfoQuery } from "../../services/api/api.service";
 import CourseItemLoader from "./components/Loader/Loader.component";
 import { Article } from "../../shared/components/Article/Article";
 import { Url } from "./components/moduleItems/Url/Url.component";
 import { Survey } from "./components/moduleItems/Survey/Survey.component";
 import { CourseInfo, CourseModule } from "./CoursePage.types";
+import { useGetCourseInfoQuery } from "./CoursePage.api";
 
 export const CoursePage: FC = () => {
   const params = useParams();

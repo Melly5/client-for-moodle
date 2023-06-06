@@ -7,7 +7,7 @@ const AddForumDiscussion = lazy(
 import { Article } from "../../shared/components/Article/Article";
 import TimeParser from "../../shared/components/Time/Time";
 
-import { useGetForumDiscussionsQuery } from "../../services/api/api.service";
+import { useGetForumDiscussionsQuery } from "./ForumPage.api";
 import { ForumDiscussion } from "./ForumPage.types";
 
 export const ForumPage = () => {

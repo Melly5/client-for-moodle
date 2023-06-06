@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { useGetQuizAttemptDataQuery } from "../../services/api/api.service";
+import { useGetQuizAttemptDataQuery } from "./QuizPage.api";
 
 export const QuizAttemptPage = () => {
   const params = useParams();

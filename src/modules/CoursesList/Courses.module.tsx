@@ -1,7 +1,8 @@
 import React from "react";
 
 import { CourseItem } from "./components/CourseItem";
-import { Course, useGetCoursesQuery } from "../../services/api/api.service";
+import { useGetCoursesQuery } from "./Courses.api";
+import { Course } from "../CoursePage/CoursePage.types";
 
 export const Courses: React.FC = () => {
   const { data: courseCards, isLoading } = useGetCoursesQuery();

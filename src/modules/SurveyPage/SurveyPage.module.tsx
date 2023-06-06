@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useGetSurveyContentQuery } from "../../services/api/api.service";
+import { useGetSurveyContentQuery } from "./SurveyPage.api";
 import { SurveyContent } from "./SurveyPage.types";
 
 export const SurveyPage = () => {

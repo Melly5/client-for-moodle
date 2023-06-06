@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useGetUrlInfoQuery } from "../../services/api/api.service";
+import { useGetUrlInfoQuery } from "./UrlPage.api";
 import { Article } from "../../shared/components/Article/Article";
 import { UrlContent } from "./UrlPage.types";
 

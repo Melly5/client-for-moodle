@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Course } from "../../../redux/slices/apiSlice";
 
 export const CourseItem = (course: Course) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="justify-around flex flex-col flex-wrap gap-x-6 my-4 mx-3 p-5 w-96 xl:w-92 h-48 divide-gray-100 rounded-lg bg-gray-100">
