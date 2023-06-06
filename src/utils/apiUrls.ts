@@ -9,6 +9,7 @@ export const apiUrls = {
   submissionStatusUrl: `${API}mod_assign_get_submission_status`,
   forumDiscussionsUrl: `${API}mod_forum_get_forum_discussions`,
   lessonPageContentUrl: `${API}mod_lesson_get_page_data`,
+  lessonStartPageContentUrl: `${API}mod_lesson_get_pages`,
   webpageContentUrl: `${API}mod_page_get_pages_by_courses`,
   quizAccessInfoUrl: `${API}mod_quiz_get_quiz_access_information`,
   quizAttemptDataUrl: `${API}mod_quiz_get_attempt_data`,

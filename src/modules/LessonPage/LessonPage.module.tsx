@@ -38,7 +38,7 @@ export const LessonPage = () => {
 
   const { data: lessonPageItems, isLoading } =
     useGetLessonPageContentQuery(props);
-  console.log(lessonPageItems);
+
   return (
     <>
       {isLoading ? (

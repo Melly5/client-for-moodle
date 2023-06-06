@@ -2,7 +2,7 @@ import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 export const Quiz = (quiz: any) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className=" flex">

@@ -1,22 +1,21 @@
 import { useLocation } from "react-router-dom";
-import { useGetUrlInfoQuery } from "./UrlPage.api";
+import { UrlProps, useGetUrlInfoQuery } from "./UrlPage.api";
 import { Article } from "../../shared/components/Article/Article";
-import { UrlContent } from "./UrlPage.types";
 
 export const UrlPage = () => {
   const { state } = useLocation();
   const { id, courseid } = state;
-  let url;
-  const { data, isLoading, isSuccess } = useGetUrlInfoQuery(courseid);
 
-  const getUrl = () => {
-    return data.find((item: UrlContent) => item.id === id);
+  const props: UrlProps = {
+    urlid: id,
+    courseid,
   };
+
+  const { data: url, isLoading, isSuccess } = useGetUrlInfoQuery(props);
+
   if (isLoading) return <div>Loading</div>;
 
   if (isSuccess) {
-    url = getUrl();
-    console.log(url);
     return (
       <div>
         <Article>{url.name}</Article>

@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Suspense } from "react";
 import parse from "html-react-parser";
 
@@ -8,11 +7,7 @@ import TimeParser from "../../shared/components/Time/Time";
 import { Article } from "../../shared/components/Article/Article";
 
 import { File } from "../../services/api/api.service";
-import {
-  Assignment,
-  SubmissionPlugins,
-  InitialState,
-} from "./AssignPage.types";
+import { SubmissionPlugins } from "./AssignPage.types";
 import {
   useGetAllAssignmentsQuery,
   useGetAllSubmissionsQuery,
@@ -20,28 +15,18 @@ import {
 } from "./AssignPage.api";
 
 export const AssignPage = () => {
-  const [assignment, setAssignment] = useState<Assignment>(InitialState);
-
   const { state } = useLocation();
   const { courseid, id } = state;
 
-  const {
-    data: assign,
-    isLoading,
-    isSuccess,
-  } = useGetAllAssignmentsQuery(courseid);
-  const { data: submission } = useGetAllSubmissionsQuery(id);
-  const { data: submissionStatus } = useGetSubmissionStatusQuery(id);
-
-  const getAssign = (data: Assignment[]) => {
-    data.map((item: Assignment) => {
-      item.id === id && setAssignment(item);
-    });
+  const props: AssignProps = {
+    assignid: id,
+    courseid,
   };
 
-  useEffect(() => {
-    getAssign(assign);
-  }, [isSuccess]);
+  const { data: assignment, isSuccess } = useGetAllAssignmentsQuery(props);
+
+  const { data: submission } = useGetAllSubmissionsQuery(id);
+  const { data: submissionStatus } = useGetSubmissionStatusQuery(id);
 
   if (isSuccess) {
     return (

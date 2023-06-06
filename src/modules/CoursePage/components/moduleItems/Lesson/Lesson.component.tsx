@@ -1,31 +1,14 @@
-import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 
-export interface LessonI {
-  id: number;
-  instance: number;
-  name: string;
-  completion: number;
-  completiondata: [];
-  dates: [];
-  url: string;
-}
+import { useGetLessonStartPageContentQuery } from "../../../../LessonPage/LessonPage.api";
+import { Lesson as LessonI } from "../../../../LessonPage/LessonPage.types";
 
 const Lesson = (lesson: LessonI) => {
   const navigate = useNavigate();
-  const [startPage, setStartPage] = useState<number>(0);
-
-  const fetchData = () => {
-    const apiStartPage = `https://dev.online.tusur.ru/moodle/webservice/rest/server.php?wstoken=2b8e54a638f0422b6859f223fa0a086e&wsfunction=mod_lesson_get_pages&moodlewsrestformat=json&lessonid=${lesson.instance}`;
-
-    const fetchStartPageData = async () => {
-      const result = await axios(apiStartPage);
-      setStartPage(result.data.pages[0].page.id);
-    };
-    fetchStartPageData();
-  };
+  const { data: startPage } = useGetLessonStartPageContentQuery(
+    lesson.instance
+  );
 
   const handleClick = () => {
     navigate(`/lesson/${lesson.id}`, {
@@ -37,8 +20,6 @@ const Lesson = (lesson: LessonI) => {
       },
     });
   };
-
-  useEffect(fetchData, []);
 
   return (
     <div className=" flex">

@@ -3,16 +3,29 @@ import { baseApi } from "../../services/api/api.service";
 import { apiUrls } from "../../utils/apiUrls";
 import { Assignment, Submission, SubmissionStatus } from "./AssignPage.types";
 
+export interface AssignProps {
+  assignid: number;
+  courseid: number;
+}
+
+const getAssign: Assignment = (data: Assignment[], id: number) => {
+  const assign: Assignment = data.find((item: Assignment) => item.id === id);
+  return assign;
+};
+
 const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllAssignments: build.query<Assignment[], number>({
-      query: (id) => {
+    getAllAssignments: build.query<Assignment[], AssignProps>({
+      query: (args) => {
+        const { courseid } = args;
         return {
-          url: `${apiUrls.allAssignmentsUrl}&courseids[0]=${id}`,
+          url: `${apiUrls.allAssignmentsUrl}&courseids[0]=${courseid}`,
           method: "GET",
         };
       },
-      transformResponse: (response) => response.courses[0].assignments,
+      transformResponse: (response, meta, args) => {
+        return getAssign(response.courses[0].assignments, args.assignid);
+      },
     }),
     getAllSubmissions: build.query<Submission, number>({
       query: (id) => {
