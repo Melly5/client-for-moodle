@@ -4,9 +4,6 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
@@ -14,7 +11,22 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@styles": ["src/styles"],
+      "@hooks": ["./src/hooks"],
+      "@modules/*": ["./src/modules/*"],
+      "@services/*": ["./src/services/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@store": ["./src/store"],
+      "@utils/*": ["./src/utils/*"],
+      "@config/*": ["config/*"],
+      "@types": ["./src/types.ts"],
+      "@public/*": ["./public/"],
+      "@redux/*": ["./src/redux/*"],
+      "@": ["./src/*"]
+    },
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

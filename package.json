@@ -12,12 +12,17 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
+    "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "html-react-parser": "^3.0.16",
     "react": "^18.2.0",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
-    "react-simple-timestamp-to-date": "^1.0.3"
+    "react-simple-timestamp-to-date": "^1.0.3",
+    "redux": "^4.2.1",
+    "vite-tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

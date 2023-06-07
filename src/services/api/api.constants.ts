@@ -1,0 +1,14 @@
+export const LOGIN_ROUTE = "/login";
+export const MAIN_ROUTE = "/";
+export const COURSE_ROUTE = "/course/:id";
+export const FOLDER_ROUTE = "/folder/:id";
+export const FORUM_ROUTE = "/forum/:id";
+export const ASSIGN_ROUTE = "/assign/:id";
+export const QUIZ_ROUTE = "/quiz/:id";
+export const LESSON_ROUTE = "/lesson/:id";
+export const RESOURCE_ROUTE = "/resource/:id";
+export const DISCUSSION_ROUTE = "/discussion/:id";
+export const PAGE_ROUTE = "/page/:id";
+export const QUIZ_ATTEMPT_ROUTE = "/quizpage/:id";
+export const URL_ROUTE = "/url/:id";
+export const SURVEY_ROUTE = "/survey/:id";
