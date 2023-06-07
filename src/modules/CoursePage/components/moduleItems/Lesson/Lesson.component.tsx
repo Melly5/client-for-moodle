@@ -1,16 +1,22 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 
 import { Lesson as LessonI } from "../../../../LessonPage/LessonPage.types";
-import { useLazyGetLessonStartPageContentQuery } from "../../../../LessonPage/LessonPage.api";
+import {
+  useGetLessonStartPageContentQuery,
+  useLazyGetLessonStartPageContentQuery,
+} from "../../../../LessonPage/LessonPage.api";
 
 const Lesson = (lesson: LessonI) => {
   const navigate = useNavigate();
-  const [triggerStartPage, { data: startPage }] =
-    useLazyGetLessonStartPageContentQuery(lesson.instance);
+  /* const [triggerStartPage, { data: startPage }] =
+    useLazyGetLessonStartPageContentQuery();*/
+  const { data: startPage } = useGetLessonStartPageContentQuery(
+    lesson.instance
+  );
 
-  const handleClick = (startPage) => {
-    triggerStartPage();
+  const HandleClick = () => {
     navigate(`/lesson/${lesson.id}`, {
       state: {
         id: lesson.id,
@@ -24,7 +30,7 @@ const Lesson = (lesson: LessonI) => {
   return (
     <div className=" flex">
       <ClipboardDocumentIcon className="h-6 w-6 mr-3" aria-hidden="true" />
-      <div onClick={() => handleClick(startPage)}>{lesson.name}</div>
+      <div onClick={HandleClick}>{lesson.name}</div>
     </div>
   );
 };

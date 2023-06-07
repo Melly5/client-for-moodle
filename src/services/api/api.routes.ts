@@ -11,6 +11,7 @@ import { Login } from "../../modules/Login.module";
 import { QuizAttemptPage } from "../../modules/QuizPage/Attempt/QuizAttemptPage.module";
 import { UrlPage } from "../../modules/UrlPage/UrlPage.module";
 import { SurveyPage } from "../../modules/SurveyPage/SurveyPage.module";
+import { QuizReviewPage } from "../../modules/QuizPage/Review/QuizReviewPage.module";
 
 import {
   LOGIN_ROUTE,
@@ -26,6 +27,7 @@ import {
   QUIZ_ATTEMPT_ROUTE,
   URL_ROUTE,
   SURVEY_ROUTE,
+  QUIZ_REVIEW_ROUTE,
 } from "./api.constants";
 
 export const authRoutes = [
@@ -76,6 +78,10 @@ export const authRoutes = [
   {
     path: SURVEY_ROUTE,
     Component: SurveyPage,
+  },
+  {
+    path: QUIZ_REVIEW_ROUTE,
+    Component: QuizReviewPage,
   },
 ];
 
