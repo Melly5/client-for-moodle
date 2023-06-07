@@ -31,10 +31,9 @@ const productApi = baseApi.injectEndpoints({
       },
     }),
     getQuizAttemptData: build.query<QuizAttemptData, QuizAttemptProps>({
-      query: (args) => {
-        const { attemptid, page } = args;
+      query: ({ attemptid, page }) => {
         return {
-          url: `${quizAttemptDataUrl}&attemptid=${attemptid}&page=${page}`,
+          url: `${apiUrls.quizAttemptDataUrl}&attemptid=${attemptid}&page=${page}`,
           method: "GET",
         };
       },

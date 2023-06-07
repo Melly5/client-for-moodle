@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Article } from "../../shared/components/Article/Article";
-import { QuizStartAttempt } from "./QuizPage.types";
 import {
+  QuizAttemptProps,
   useGetQuizAccessInformationQuery,
-  useLazyGetQuizStartAttemptQuery,
 } from "./QuizPage.api";
+
+import { useQuizAttemptPageController } from "./Attempt/QuizAttempt.controller";
 
 export const QuizPage = () => {
   const navigate = useNavigate();
@@ -14,13 +15,19 @@ export const QuizPage = () => {
 
   const { data: quizAccessInfo } = useGetQuizAccessInformationQuery(id);
 
-  const [triggerStartAttempt, { data: quizStartAttemptInfo }] =
-    useLazyGetQuizStartAttemptQuery(id);
+  const { product, handleClick } = useQuizAttemptPageController(id);
 
-  const startAttemptOnClick = (quizStartAttemptInfo: QuizStartAttempt) => {
-    triggerStartAttempt();
-    navigate(`/quizpage/${quizStartAttemptInfo.attempt.currentpage}`, {
-      state: { id: quizStartAttemptInfo.id },
+  const navigateToPage = (attempt: any) => {
+    const layout = attempt.layout.split(",").map(Number);
+    const pageLast = Math.max(...layout);
+
+    const props: QuizAttemptProps = {
+      attemptid: attempt.id,
+      page: 0,
+    };
+
+    navigate(`/quizpage/1`, {
+      state: { props, pageLast },
     });
   };
 
@@ -34,10 +41,20 @@ export const QuizPage = () => {
       </div>
       <button
         className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
-        onClick={() => startAttemptOnClick(quizStartAttemptInfo)}
+        onClick={() => handleClick()}
       >
         Начать попытку
       </button>
+      {product.data?.attempt?.id && (
+        <div>
+          <button
+            className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
+            onClick={() => navigateToPage(product.data?.attempt)}
+          >
+            Перейти к тесту
+          </button>
+        </div>
+      )}
     </div>
   );
 };

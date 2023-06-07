@@ -8,7 +8,7 @@ import { CoursePage } from "../../modules/CoursePage/CoursePage.module";
 import ForumDiscussion from "../../modules/CoursePage/components/moduleItems/Discussion/Discussion.component";
 import { WebpagePage } from "../../modules/WebpagePage/WebpagePage.module";
 import { Login } from "../../modules/Login.module";
-import { QuizAttemptPage } from "../../modules/QuizPage/QuizAttemptPage.module";
+import { QuizAttemptPage } from "../../modules/QuizPage/Attempt/QuizAttemptPage.module";
 import { UrlPage } from "../../modules/UrlPage/UrlPage.module";
 import { SurveyPage } from "../../modules/SurveyPage/SurveyPage.module";
 
