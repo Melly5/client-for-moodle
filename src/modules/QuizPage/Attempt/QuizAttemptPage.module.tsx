@@ -14,6 +14,7 @@ import {
 } from "./QuestionType/QuestionType.controller";
 import { QuizMultichoiceController } from "./QuestionType/Multichoice/QuizMultichoice.controller";
 import { QuizNumerical } from "./QuestionType/Numerical/QuizNumerical.component";
+import Timer from "../../../shared/components/Timer/Timer";
 
 export const QuizAttemptPage = () => {
   const [data, setData] = useState("");
@@ -94,9 +95,10 @@ export const QuizAttemptPage = () => {
       });
       variants = variantsArray;
     }
-
+    const deadline = "December, 31, 2023";
     return (
       <div>
+        <Timer deadline={deadline} />
         {attemptData &&
           attemptData.questions?.map((question, id: number) => (
             <div key={id} id="myDiv" className="flex  justify-center">
