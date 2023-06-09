@@ -17,7 +17,7 @@ export const QuizPage = () => {
 
   const { product, handleClick } = useQuizAttemptPageController(id);
 
-  const navigateToPage = (attempt: any) => {
+  const navigateToPage = (attempt) => {
     const layout = attempt.layout.split(",").map(Number);
     const pageLast = Math.max(...layout);
 

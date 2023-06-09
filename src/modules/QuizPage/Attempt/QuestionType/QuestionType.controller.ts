@@ -1,6 +1,4 @@
-import { useLazyGetQuizStartAttemptQuery } from "../QuizPage.api";
-
-export const QuizInfoController = (attemptData: any) => {
+export const QuizInfoController = (attemptData) => {
   const attemptDataBody = new DOMParser().parseFromString(
     attemptData.questions[0].html,
     "text/html"
@@ -23,12 +21,15 @@ export const QuizInfoController = (attemptData: any) => {
   };
 };
 
-export const QuizTypeController = (attemptDataBody: any) => {
+export const QuizTypeController = (attemptDataBody) => {
   let type = "";
   const multichoiceType = attemptDataBody.getElementsByClassName(`multichoice`);
   const truefalseType = attemptDataBody.getElementsByClassName(`truefalse`);
+  const numerical = attemptDataBody.getElementsByClassName(`numerical`);
+
   multichoiceType.length > 0 && (type = "multichoice");
   truefalseType.length > 0 && (type = "truefalse");
+  numerical.length > 0 && (type = "numerical");
 
   return {
     type,

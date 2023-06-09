@@ -1,4 +1,3 @@
-import React from "react";
 import { useLazyGetQuizStartAttemptQuery } from "../QuizPage.api";
 
 export const useQuizAttemptPageController = (quizid: number) => {

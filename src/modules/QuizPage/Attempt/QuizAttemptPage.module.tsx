@@ -9,16 +9,12 @@ import { QuizMultichoice } from "./QuestionType/Multichoice/QuizMultichoice.comp
 import {
   QuizInfoController,
   QuizTypeController,
-  useQuizInfoController,
-  useQuizTypeController,
 } from "./QuestionType/QuestionType.controller";
-import {
-  QuizMultichoiceController,
-  useQuizMultichoiceController,
-} from "./QuestionType/Multichoice/QuizMultichoice.controller";
+import { QuizMultichoiceController } from "./QuestionType/Multichoice/QuizMultichoice.controller";
+import { QuizNumerical } from "./QuestionType/Numerical/QuizNumerical.component";
 
 export const QuizAttemptPage = () => {
-  const [data, setData] = useState(-1);
+  const [data, setData] = useState("");
 
   const navigate = useNavigate();
 
@@ -33,6 +29,7 @@ export const QuizAttemptPage = () => {
 
   const navigateToPage = (num: number) => {
     savePageData();
+    setData("");
     const idNext = Number(id) + num;
 
     navigate(`/quizpage/${idNext}`, {
@@ -49,6 +46,7 @@ export const QuizAttemptPage = () => {
   const navigateToReview = () => {
     savePageData();
     navigate(`/review/${props.attemptid}`);
+    setData("");
   };
 
   const savePageData = async () => {
@@ -56,7 +54,7 @@ export const QuizAttemptPage = () => {
       attemptid: props.attemptid,
       questionid: props.page,
       name: `q${props.attemptid}:${props.page + 1}_answer`,
-      value: data.toString(),
+      value: data,
     };
     await triggerSave(attemptData);
     results.status === "fulfilled" && console.log(results);
@@ -65,16 +63,12 @@ export const QuizAttemptPage = () => {
   const handleChange = (value) => {
     setData(value);
   };
+
   if (isLoading) return <div>Loading...</div>;
+
   if (attemptData) {
-    const {
-      attemptDataBody,
-      questionText,
-      stateText,
-      grade,
-      questionName,
-      descriptionName,
-    } = QuizInfoController(attemptData);
+    const { attemptDataBody, questionText, stateText, grade, descriptionName } =
+      QuizInfoController(attemptData);
     const { type } = QuizTypeController(attemptDataBody);
     let variants = [];
     if (type === "multichoice" || type === "truefalse") {
@@ -89,7 +83,7 @@ export const QuizAttemptPage = () => {
     return (
       <div>
         {attemptData &&
-          attemptData.questions?.map((question: any, id: number) => (
+          attemptData.questions?.map((question, id: number) => (
             <div key={id} id="myDiv" className="flex  justify-center">
               <div className="m-3 p-5 w-1/4 h-1/2 bg-gray-100 rounded-lg">
                 <div className="text-lg font-medium">{questionText}</div>
@@ -99,13 +93,17 @@ export const QuizAttemptPage = () => {
               </div>
 
               <div className="m-3 p-5 w-2/4 h-1/2 bg-gray-100 rounded-lg">
-                <div className="text-2xl font-medium">{questionName}</div>
-                <div>{descriptionName}</div>
-                <QuizMultichoice
-                  answerArray={variants}
-                  onSelectRadio={handleChange}
-                  data={data}
-                />
+                <div className="text-2xl font-medium">{descriptionName}</div>
+                {(type === "multichoice" || type === "truefalse") && (
+                  <QuizMultichoice
+                    answerArray={variants}
+                    onSelectRadio={handleChange}
+                    data={data}
+                  />
+                )}
+                {type === "numerical" && (
+                  <QuizNumerical onInput={handleChange} data={data} />
+                )}
               </div>
             </div>
           ))}
