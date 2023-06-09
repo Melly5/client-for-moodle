@@ -9,6 +9,13 @@ import { QuizMultichoice } from "./QuestionType/Multichoice/QuizMultichoice.comp
 
 export const QuizAttemptPage = () => {
   const [data, setData] = useState(-1);
+  let temp = "",
+    questionN = "",
+    stateText = "",
+    grade = "",
+    questionName = "",
+    descriptionName = "",
+    output = [];
 
   const navigate = useNavigate();
 
@@ -48,7 +55,7 @@ export const QuizAttemptPage = () => {
       name: `q${props.attemptid}:${props.page + 1}_answer`,
       value: data.toString(),
     };
-
+    console.log(attemptData);
     await triggerSave(attemptData);
     results.status === "fulfilled" && console.log(results);
   };
@@ -58,32 +65,47 @@ export const QuizAttemptPage = () => {
   };
 
   if (attemptData) {
-    const temp = new DOMParser().parseFromString(
+    temp = new DOMParser().parseFromString(
       attemptData.questions[0].html,
       "text/html"
     ).body;
-    const questionN = temp.getElementsByTagName(`h3`)[0].innerText;
-    const stateText = temp.getElementsByClassName(`state`)[0].innerHTML;
-    const grade = temp.getElementsByClassName(`grade`)[0].innerHTML;
-    const questionName = temp.getElementsByTagName(`h4`)[0].innerText;
-    const descriptionName = temp.getElementsByClassName(`qtext`)[0].innerText;
+    const multichoiceType = temp.getElementsByClassName(`multichoice`);
+    const truefalseType = temp.getElementsByClassName(`truefalse`);
 
-    const multichoicePart1 = temp.getElementsByClassName(`r0`).length;
-    const multichoicePart2 = temp.getElementsByClassName(`r1`).length;
-    const choiceLength = multichoicePart1 + multichoicePart2;
+    if (multichoiceType.length > 0 || truefalseType.length > 0) {
+      questionN = temp.getElementsByTagName(`h3`)[0].innerText;
+      stateText = temp.getElementsByClassName(`state`)[0].innerHTML;
+      grade = temp.getElementsByClassName(`grade`)[0].innerHTML;
+      questionName = temp.getElementsByTagName(`h4`)[0].innerText;
+      descriptionName = temp.getElementsByClassName(`qtext`)[0].innerText;
+      const multichoicePart1 = temp.getElementsByClassName(`r0`).length;
+      const multichoicePart2 = temp.getElementsByClassName(`r1`).length;
+      const choiceLength = multichoicePart1 + multichoicePart2;
+      let answer = temp.getElementsByClassName(`answer`)[0].outerHTML;
+      answer = new DOMParser().parseFromString(answer, "text/html");
+      const answerArray: string[] = [];
+      console.log(answer);
+      if (multichoiceType.length > 0) {
+        for (let i = 0; i < choiceLength; i++) {
+          const choiceText = answer?.getElementById(
+            `q${props.attemptid}:${props.page + 1}_answer${i}_label`
+          ).innerText;
+          answerArray[i] = choiceText;
+        }
+        output = Object.keys(answerArray).map(function (key) {
+          return answerArray[key];
+        });
+      }
+      if (truefalseType.length > 0) {
+        const choiceText = answer?.getElementsByClassName(`ml-1`);
+        answerArray[0] = choiceText[0].innerText;
+        answerArray[1] = choiceText[1].innerText;
 
-    let answer = temp.getElementsByClassName(`answer`)[0].outerHTML;
-    answer = new DOMParser().parseFromString(answer, "text/html");
-    const answerArray: string[] = [];
-    for (let i = 0; i < choiceLength; i++) {
-      const choiceText = answer?.getElementById(
-        `q${props.attemptid}:${props.page + 1}_answer${i}_label`
-      ).innerText;
-      answerArray[i] = choiceText;
+        output = Object.keys(answerArray).map(function (key) {
+          return answerArray[key];
+        });
+      }
     }
-    const output = Object.keys(answerArray).map(function (key) {
-      return answerArray[key];
-    });
 
     return (
       <div>
