@@ -17,4 +17,5 @@ export const apiUrls = {
   urlInfoUrl: `${API}mod_url_get_urls_by_courses`,
   surveyContentUrl: `${API}mod_survey_get_questions`,
   quizSaveAttemptUrl: `${API}mod_quiz_save_attempt`,
+  quizFinishAttemptUrl: `${API}mod_quiz_process_attempt`,
 };

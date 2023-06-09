@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useGetQuizAttemptDataQuery } from "../QuizPage.api";
 import {
   QuizSaveAttemptDataProps,
+  useLazyGetQuizFinishAttemptQuery,
+  useLazyGetQuizProcessAttemptQuery,
   useLazyGetQuizSaveAttemptDataQuery,
 } from "./QuizAttempt.api";
 import { QuizMultichoice } from "./QuestionType/Multichoice/QuizMultichoice.component";
@@ -26,6 +28,8 @@ export const QuizAttemptPage = () => {
 
   const { data: attemptData, isLoading } = useGetQuizAttemptDataQuery(props);
   const [triggerSave, results] = useLazyGetQuizSaveAttemptDataQuery();
+  const [triggerProcess, processResults] = useLazyGetQuizProcessAttemptQuery();
+  const [triggerFinish, finishResults] = useLazyGetQuizFinishAttemptQuery();
 
   const navigateToPage = (num: number) => {
     savePageData();
@@ -44,20 +48,31 @@ export const QuizAttemptPage = () => {
   };
 
   const navigateToReview = () => {
-    savePageData();
+    finishPageData();
     navigate(`/review/${props.attemptid}`);
     setData("");
   };
 
-  const savePageData = async () => {
+  const savePageData = () => {
     const attemptData: QuizSaveAttemptDataProps = {
       attemptid: props.attemptid,
       questionid: props.page,
       name: `q${props.attemptid}:${props.page + 1}_answer`,
       value: data,
     };
-    await triggerSave(attemptData);
-    results.status === "fulfilled" && console.log(results);
+    triggerProcess(attemptData);
+    processResults.status === "fulfilled" && console.log(processResults);
+  };
+
+  const finishPageData = () => {
+    const attemptData: QuizSaveAttemptDataProps = {
+      attemptid: props.attemptid,
+      questionid: props.page,
+      name: `q${props.attemptid}:${props.page + 1}_answer`,
+      value: data,
+    };
+    triggerFinish(attemptData);
+    finishResults.status === "fulfilled" && console.log(finishResults);
   };
 
   const handleChange = (value) => {

@@ -15,7 +15,7 @@ export const QuizPage = () => {
 
   const { data: quizAccessInfo } = useGetQuizAccessInformationQuery(id);
 
-  const { product, handleClick } = useQuizAttemptPageController(id);
+  const { product, handleStartClick } = useQuizAttemptPageController(id);
 
   const navigateToPage = (attempt) => {
     const layout = attempt.layout.split(",").map(Number);
@@ -52,7 +52,7 @@ export const QuizPage = () => {
       ) : (
         <button
           className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
-          onClick={() => handleClick()}
+          onClick={() => handleStartClick()}
         >
           Начать попытку
         </button>
