@@ -39,13 +39,8 @@ export const QuizPage = () => {
           <div key={id}>{rule}</div>
         ))}
       </div>
-      <button
-        className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
-        onClick={() => handleClick()}
-      >
-        Начать попытку
-      </button>
-      {product.data?.attempt?.id && (
+
+      {product.data?.attempt?.id ? (
         <div>
           <button
             className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
@@ -54,6 +49,13 @@ export const QuizPage = () => {
             Перейти к тесту
           </button>
         </div>
+      ) : (
+        <button
+          className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
+          onClick={() => handleClick()}
+        >
+          Начать попытку
+        </button>
       )}
     </div>
   );

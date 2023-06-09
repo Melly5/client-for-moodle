@@ -1,11 +1,15 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import parse from "html-react-parser";
 
 import { useGetQuizAttemptDataQuery } from "../QuizPage.api";
+import {
+  QuizSaveAttemptDataProps,
+  useLazyGetQuizSaveAttemptDataQuery,
+} from "./QuizAttempt.api";
 
 export const QuizAttemptPage = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(-1);
   const navigate = useNavigate();
 
   const params = useParams();
@@ -15,10 +19,10 @@ export const QuizAttemptPage = () => {
   const { props, pageLast } = state;
 
   const { data: attemptData } = useGetQuizAttemptDataQuery(props);
+  const [triggerSave, results] = useLazyGetQuizSaveAttemptDataQuery();
 
   const navigateToPage = (num: number) => {
-    //need to handle save request
-
+    savePageData();
     const idNext = Number(id) + num;
 
     navigate(`/quizpage/${idNext}`, {
@@ -33,8 +37,20 @@ export const QuizAttemptPage = () => {
   };
 
   const navigateToReview = () => {
-    //need to handle save request
+    savePageData();
     navigate(`/review/${props.attemptid}`);
+  };
+
+  const savePageData = async () => {
+    const attemptData: QuizSaveAttemptDataProps = {
+      attemptid: props.attemptid,
+      questionid: props.page,
+      name: `q${props.attemptid}:${props.page + 1}_answer`,
+      value: data.toString(),
+    };
+
+    await triggerSave(attemptData);
+    results.status === "fulfilled" && console.log(results);
   };
 
   if (attemptData) {
@@ -57,11 +73,11 @@ export const QuizAttemptPage = () => {
     const answerArray: string = [];
     for (let i = 0; i < choiceLength; i++) {
       const choiceText = answer?.getElementById(
-        `q45:${props.page + 1}_answer${i}_label`
+        `q${props.attemptid}:${props.page + 1}_answer${i}_label`
       ).innerText;
       answerArray[i] = choiceText;
     }
-
+    // const qValue = document.getElementById("q52:1_answer2").value;
     return (
       <div>
         {attemptData &&
@@ -89,6 +105,7 @@ export const QuizAttemptPage = () => {
                           className="mr-3"
                           value="Coffee"
                           checked={data === id}
+                          onChange={() => setData(id)}
                         />
                         <div>{parse(item)}</div>
                       </span>
@@ -123,7 +140,7 @@ export const QuizAttemptPage = () => {
         </div>
         <button
           className="my-2 px-3 py-2  text-white rounded-xl bg-blue-500"
-          onClick={() => savePageData(1)}
+          onClick={() => savePageData()}
         >
           Отправить на сохранение
         </button>
