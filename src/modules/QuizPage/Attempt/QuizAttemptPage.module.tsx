@@ -6,16 +6,19 @@ import {
   useLazyGetQuizSaveAttemptDataQuery,
 } from "./QuizAttempt.api";
 import { QuizMultichoice } from "./QuestionType/Multichoice/QuizMultichoice.component";
+import {
+  QuizInfoController,
+  QuizTypeController,
+  useQuizInfoController,
+  useQuizTypeController,
+} from "./QuestionType/QuestionType.controller";
+import {
+  QuizMultichoiceController,
+  useQuizMultichoiceController,
+} from "./QuestionType/Multichoice/QuizMultichoice.controller";
 
 export const QuizAttemptPage = () => {
   const [data, setData] = useState(-1);
-  let temp = "",
-    questionN = "",
-    stateText = "",
-    grade = "",
-    questionName = "",
-    descriptionName = "",
-    output = [];
 
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ export const QuizAttemptPage = () => {
   const { state } = useLocation();
   const { props, pageLast } = state;
 
-  const { data: attemptData } = useGetQuizAttemptDataQuery(props);
+  const { data: attemptData, isLoading } = useGetQuizAttemptDataQuery(props);
   const [triggerSave, results] = useLazyGetQuizSaveAttemptDataQuery();
 
   const navigateToPage = (num: number) => {
@@ -55,56 +58,32 @@ export const QuizAttemptPage = () => {
       name: `q${props.attemptid}:${props.page + 1}_answer`,
       value: data.toString(),
     };
-    console.log(attemptData);
     await triggerSave(attemptData);
     results.status === "fulfilled" && console.log(results);
   };
 
-  const handleLanguage = (langValue) => {
-    setData(langValue);
+  const handleChange = (value) => {
+    setData(value);
   };
-
+  if (isLoading) return <div>Loading...</div>;
   if (attemptData) {
-    temp = new DOMParser().parseFromString(
-      attemptData.questions[0].html,
-      "text/html"
-    ).body;
-    const multichoiceType = temp.getElementsByClassName(`multichoice`);
-    const truefalseType = temp.getElementsByClassName(`truefalse`);
-
-    if (multichoiceType.length > 0 || truefalseType.length > 0) {
-      questionN = temp.getElementsByTagName(`h3`)[0].innerText;
-      stateText = temp.getElementsByClassName(`state`)[0].innerHTML;
-      grade = temp.getElementsByClassName(`grade`)[0].innerHTML;
-      questionName = temp.getElementsByTagName(`h4`)[0].innerText;
-      descriptionName = temp.getElementsByClassName(`qtext`)[0].innerText;
-      const multichoicePart1 = temp.getElementsByClassName(`r0`).length;
-      const multichoicePart2 = temp.getElementsByClassName(`r1`).length;
-      const choiceLength = multichoicePart1 + multichoicePart2;
-      let answer = temp.getElementsByClassName(`answer`)[0].outerHTML;
-      answer = new DOMParser().parseFromString(answer, "text/html");
-      const answerArray: string[] = [];
-      console.log(answer);
-      if (multichoiceType.length > 0) {
-        for (let i = 0; i < choiceLength; i++) {
-          const choiceText = answer?.getElementById(
-            `q${props.attemptid}:${props.page + 1}_answer${i}_label`
-          ).innerText;
-          answerArray[i] = choiceText;
-        }
-        output = Object.keys(answerArray).map(function (key) {
-          return answerArray[key];
-        });
-      }
-      if (truefalseType.length > 0) {
-        const choiceText = answer?.getElementsByClassName(`ml-1`);
-        answerArray[0] = choiceText[0].innerText;
-        answerArray[1] = choiceText[1].innerText;
-
-        output = Object.keys(answerArray).map(function (key) {
-          return answerArray[key];
-        });
-      }
+    const {
+      attemptDataBody,
+      questionText,
+      stateText,
+      grade,
+      questionName,
+      descriptionName,
+    } = QuizInfoController(attemptData);
+    const { type } = QuizTypeController(attemptDataBody);
+    let variants = [];
+    if (type === "multichoice" || type === "truefalse") {
+      const { variantsArray } = QuizMultichoiceController({
+        props,
+        attemptDataBody,
+        type,
+      });
+      variants = variantsArray;
     }
 
     return (
@@ -113,7 +92,7 @@ export const QuizAttemptPage = () => {
           attemptData.questions?.map((question: any, id: number) => (
             <div key={id} id="myDiv" className="flex  justify-center">
               <div className="m-3 p-5 w-1/4 h-1/2 bg-gray-100 rounded-lg">
-                <div className="text-lg font-medium">{questionN}</div>
+                <div className="text-lg font-medium">{questionText}</div>
                 <div>{stateText}</div>
                 <div>{grade}</div>
                 <div>Отметить вопрос</div>
@@ -123,8 +102,8 @@ export const QuizAttemptPage = () => {
                 <div className="text-2xl font-medium">{questionName}</div>
                 <div>{descriptionName}</div>
                 <QuizMultichoice
-                  answerArray={output}
-                  onSelectRadio={handleLanguage}
+                  answerArray={variants}
+                  onSelectRadio={handleChange}
                   data={data}
                 />
               </div>
