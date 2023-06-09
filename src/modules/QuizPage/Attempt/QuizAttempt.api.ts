@@ -13,7 +13,6 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getQuizSaveAttemptData: build.query<any, QuizSaveAttemptDataProps>({
       query: ({ attemptid, questionid, name, value }) => {
-        console.log("hey", value);
         return {
           url: `${apiUrls.quizSaveAttemptUrl}&attemptid=${attemptid}&data[${questionid}][name]=${name}&data[${questionid}][value]=${value}`,
           method: "GET",

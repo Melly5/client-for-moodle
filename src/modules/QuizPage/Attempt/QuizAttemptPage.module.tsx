@@ -1,15 +1,15 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import parse from "html-react-parser";
-
 import { useGetQuizAttemptDataQuery } from "../QuizPage.api";
 import {
   QuizSaveAttemptDataProps,
   useLazyGetQuizSaveAttemptDataQuery,
 } from "./QuizAttempt.api";
+import { QuizMultichoice } from "./QuestionType/Multichoice/QuizMultichoice.component";
 
 export const QuizAttemptPage = () => {
   const [data, setData] = useState(-1);
+
   const navigate = useNavigate();
 
   const params = useParams();
@@ -53,6 +53,10 @@ export const QuizAttemptPage = () => {
     results.status === "fulfilled" && console.log(results);
   };
 
+  const handleLanguage = (langValue) => {
+    setData(langValue);
+  };
+
   if (attemptData) {
     const temp = new DOMParser().parseFromString(
       attemptData.questions[0].html,
@@ -70,14 +74,17 @@ export const QuizAttemptPage = () => {
 
     let answer = temp.getElementsByClassName(`answer`)[0].outerHTML;
     answer = new DOMParser().parseFromString(answer, "text/html");
-    const answerArray: string = [];
+    const answerArray: string[] = [];
     for (let i = 0; i < choiceLength; i++) {
       const choiceText = answer?.getElementById(
         `q${props.attemptid}:${props.page + 1}_answer${i}_label`
       ).innerText;
       answerArray[i] = choiceText;
     }
-    // const qValue = document.getElementById("q52:1_answer2").value;
+    const output = Object.keys(answerArray).map(function (key) {
+      return answerArray[key];
+    });
+
     return (
       <div>
         {attemptData &&
@@ -89,28 +96,15 @@ export const QuizAttemptPage = () => {
                 <div>{grade}</div>
                 <div>Отметить вопрос</div>
               </div>
+
               <div className="m-3 p-5 w-2/4 h-1/2 bg-gray-100 rounded-lg">
                 <div className="text-2xl font-medium">{questionName}</div>
                 <div>{descriptionName}</div>
-                <div className="px-6">
-                  {answerArray &&
-                    answerArray.map((item: string, id: number) => (
-                      <span
-                        key={id}
-                        className="flex pt-3"
-                        onClick={() => setData(id)}
-                      >
-                        <input
-                          type="radio"
-                          className="mr-3"
-                          value="Coffee"
-                          checked={data === id}
-                          onChange={() => setData(id)}
-                        />
-                        <div>{parse(item)}</div>
-                      </span>
-                    ))}
-                </div>
+                <QuizMultichoice
+                  answerArray={output}
+                  onSelectRadio={handleLanguage}
+                  data={data}
+                />
               </div>
             </div>
           ))}
