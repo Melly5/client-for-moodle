@@ -26,10 +26,12 @@ export const QuizTypeController = (attemptDataBody) => {
   const multichoiceType = attemptDataBody.getElementsByClassName(`multichoice`);
   const truefalseType = attemptDataBody.getElementsByClassName(`truefalse`);
   const numerical = attemptDataBody.getElementsByClassName(`numerical`);
+  const shortanswer = attemptDataBody.getElementsByClassName(`shortanswer`);
 
   multichoiceType.length > 0 && (type = "multichoice");
   truefalseType.length > 0 && (type = "truefalse");
   numerical.length > 0 && (type = "numerical");
+  shortanswer.length > 0 && (type = "shortanswer");
 
   return {
     type,

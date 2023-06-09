@@ -104,6 +104,9 @@ export const QuizAttemptPage = () => {
                 {type === "numerical" && (
                   <QuizNumerical onInput={handleChange} data={data} />
                 )}
+                {type === "shortanswer" && (
+                  <QuizNumerical onInput={handleChange} data={data} />
+                )}
               </div>
             </div>
           ))}
