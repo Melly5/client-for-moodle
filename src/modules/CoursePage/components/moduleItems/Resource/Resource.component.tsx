@@ -26,7 +26,6 @@ const Resource = (resource: any) => {
       <a
         href={`${resource.contents[0].fileurl}&token=2b8e54a638f0422b6859f223fa0a086e`}
         download
-        className="mx-3"
       >
         {resource.name}
       </a>
