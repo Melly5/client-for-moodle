@@ -1,5 +1,6 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+
 import { useGetQuizAttemptDataQuery } from "../QuizPage.api";
 import {
   QuizSaveAttemptDataProps,
@@ -27,7 +28,11 @@ export const QuizAttemptPage = () => {
   const { state } = useLocation();
   const { props, pageLast } = state;
 
-  const { data: attemptData, isLoading } = useGetQuizAttemptDataQuery(props);
+  const {
+    data: attemptData,
+    isLoading,
+    isSuccess,
+  } = useGetQuizAttemptDataQuery(props);
   const [triggerSave, results] = useLazyGetQuizSaveAttemptDataQuery();
   const [triggerProcess, processResults] = useLazyGetQuizProcessAttemptQuery();
   const [triggerFinish, finishResults] = useLazyGetQuizFinishAttemptQuery();
@@ -82,7 +87,7 @@ export const QuizAttemptPage = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (attemptData) {
+  if (isSuccess) {
     const { attemptDataBody, questionText, stateText, grade, descriptionName } =
       QuizInfoController(attemptData);
     const { type } = QuizTypeController(attemptDataBody);
@@ -127,7 +132,6 @@ export const QuizAttemptPage = () => {
               </div>
             </div>
           ))}
-
         <div className="flex justify-between">
           <button
             className="my-2 mr-4 px-3 py-2  text-white rounded-xl bg-blue-500"
